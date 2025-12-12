@@ -131,6 +131,23 @@ button#no:hover { animation:jump 0.5s infinite alternate;}
     0% { transform:translateY(0) scale(1); opacity:1; }
     100% { transform:translateY(-200px) scale(1.5); opacity:0; }
 }
+#revisitBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 25px;
+    font-size: 1.3rem;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #ff70a6, #ff0055);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255,255,255,0.7);
+    display: none;   /* hidden by default */
+    z-index: 20;
+    font-family:'Shadows Into Light', cursive;
+}
+
 </style>
 
 </head>
@@ -165,6 +182,8 @@ button#no:hover { animation:jump 0.5s infinite alternate;}
 <div id="magicText">I Love You BABY ❤️😘</div>
 
 <audio id="piano" src="assets/piano.mp3" loop autoplay></audio>
+<button id="revisitBtn" onclick="goNext()">Revisit ❤️</button>
+
 
 <script>
 // Fade-in romantic text
@@ -210,9 +229,13 @@ function yesClicked(){
         createBurst();
         if(scale>=1){
             clearInterval(zoomInterval);
+
+            // Show revisit button
+            document.getElementById('revisitBtn').style.display = "block";
         }
     },50);
 }
+
 
 // NO click
 function noClicked(){
@@ -222,9 +245,11 @@ function noClicked(){
     btn.style.left=Math.random()*80+'vw';
     btn.style.top=Math.random()*80+'vh';
 }
+function goNext() {
+    window.location.href = "index.html";
+}
+
 </script>
 
 </body>
 </html>
-
-
