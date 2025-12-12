@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy New Year</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Shadows Into Light', cursive;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+}
+
+#newyear {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    text-align: center;
+}
+
+#newyear h1 {
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 2px 2px 10px #ff70a6;
+    margin-bottom: 20px;
+}
+
+#newyear p {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+#newyear img.herpic {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    filter: blur(3px);
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+#newyear img.teddy {
+    width: 100px;
+    animation: bounce 1s infinite alternate;
+    margin-bottom: 20px;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+
+/* Sparkles */
+#sparkles .sparkle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    animation: sparkle 2s infinite;
+}
+@keyframes sparkle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.5) translate(20px, 20px); }
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: #ff70a6;
+    color: white;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+}
+button:hover {
+    transform: scale(1.1);
+}
+/* Multiple blurred background images */
+.bg-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+    opacity: 0.45; /* Soft visibility */
+}
+
+.bg-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(6px) brightness(0.9);
+    border-radius: 20px;
+    animation: slowMove 8s infinite alternate ease-in-out;
+}
+
+/* Smooth movement animation for soft dreamy effect */
+@keyframes slowMove {
+    0% { transform: scale(1) translateY(0); }
+    100% { transform: scale(1.08) translateY(-10px); }
+}
+
+</style>
+</head>
+<body>
+
+<section id="newyear">
+    <h1>🎉 Happy New Year 2026! 🎉</h1>
+    <p>Can we start our 2026 together? 💖</p>
+    <img src="assets/background.jpg" alt="Her Pic" class="herpic">
+    <button onclick="nextSection()">Start ✨</button>
+    <div id="sparkles"></div>
+    <audio id="bg-music" src="assets/piano.mp3"></audio>
+</section>
+
+<script>
+/* Create floating sparkles */
+const sparklesContainer = document.getElementById('sparkles');
+for (let i = 0; i < 30; i++) {
+    let s = document.createElement('div');
+    s.className = 'sparkle';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.left = Math.random() * 100 + '%';
+    sparklesContainer.appendChild(s);
+}
+
+/* Start button: play music & go to next section */
+function nextSection() {
+    document.getElementById('bg-music').play();
+    window.location.href = 'hearts.html';
+}
+</script>
+</body>
+</html>

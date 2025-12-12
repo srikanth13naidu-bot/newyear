@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Lane</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Shadows Into Light', cursive;
+    background: linear-gradient(135deg, #fad0c4, #ff9a9e);
+    overflow: hidden;
+}
+
+.section-header {
+    font-size: 2rem;
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+    text-shadow: 2px 2px 10px #ff70a6;
+    animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+    0% {opacity:0; transform: translateY(-20px);}
+    100% {opacity:1; transform: translateY(0);}
+}
+
+/* Polaroid container */
+#memorylane {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 40px;
+    gap: 20px;
+    position: relative;
+}
+
+.polaroid {
+    width: 190px;
+    height: 250px;
+    border-radius: 18px;
+    padding: 0;
+    background: rgba(255,255,255,0.1); /* glass feel */
+    backdrop-filter: blur(8px);
+    box-shadow: 
+        0 10px 25px rgba(0,0,0,0.2),
+        0 0 25px rgba(255,150,180,0.5); /* pink glow */
+    overflow: hidden;  /* no borders visible */
+    cursor: pointer;
+    transform: rotate(-4deg);
+    transition: transform 0.5s ease, box-shadow 0.4s ease;
+}
+
+/* Hover effect */
+.polaroid:hover {
+    transform: scale(1.05) rotate(0deg);
+    box-shadow: 
+        0 15px 35px rgba(0,0,0,0.3),
+        0 0 35px rgba(255,100,160,0.7);
+}
+
+/* Borderless-image – fully visible */
+.polaroid img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* full image seen */
+    background: rgba(255,255,255,0.2);
+    border-radius: 18px;
+}
+
+/* Add soft breath animation */
+.polaroid {
+    animation: softFloat 5s ease-in-out infinite alternate;
+}
+
+@keyframes softFloat {
+    0% { transform: rotate(-4deg) translateY(0px); }
+    100% { transform: rotate(-2deg) translateY(-10px); }
+}
+
+/* Floating sparkles */
+.sparkle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: sparkleAnim 4s linear infinite;
+}
+
+@keyframes sparkleAnim {
+    0% { transform: translateY(0); opacity:1;}
+    50% { opacity:0.5; }
+    100% { transform: translateY(-200px); opacity:0;}
+}
+
+/* Flying butterflies */
+.butterfly {
+    position: absolute;
+    font-size: 2rem;
+    animation: fly 10s linear infinite;
+}
+
+@keyframes fly {
+    0% { transform: translateX(-50px) translateY(0) rotate(0deg);}
+    50% { transform: translateX(50vw) translateY(20vh) rotate(180deg);}
+    100% { transform: translateX(100vw) translateY(-20vh) rotate(360deg);}
+}
+
+/* Pop effect */
+.pop-effect {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: floatUp 1s forwards;
+}
+
+@keyframes floatUp {
+    0% { opacity:1; transform: translateY(0) scale(1);}
+    100% { opacity:0; transform: translateY(-80px) scale(1.5);}
+}
+#nextBtn:hover {
+    transform: scale(1.1);
+    background: #ff4d6d;
+}
+@keyframes bounceHint {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+    0% { text-shadow: 0 0 5px #fff, 0 0 10px #ff9a9e; }
+    50% { text-shadow: 0 0 15px #fff, 0 0 20px #ff70a6; }
+    100% { text-shadow: 0 0 5px #fff, 0 0 10px #ff9a9e; }
+}
+
+@keyframes arrowBounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(10px); }
+}
+.section-header {
+    font-size: 2rem;
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+    text-shadow: 2px 2px 15px #ff70a6;
+    animation: fadeIn 2s ease, sparkleText 3s infinite alternate;
+}
+
+@keyframes sparkleText {
+    0% { text-shadow: 2px 2px 15px #ff70a6; }
+    50% { text-shadow: 2px 2px 25px #ffd1dc; }
+    100% { text-shadow: 2px 2px 15px #ff70a6; }
+}
+@keyframes teddyBounce {
+    0% { transform: translateY(0) rotate(-10deg); }
+    50% { transform: translateY(12px) rotate(10deg); }
+    100% { transform: translateY(0) rotate(-10deg); }
+}
+.top-align img {
+    object-position: top;
+}  
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px; /* optional, if you want soft corners */
+}
+.image-frame {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+</style>
+</head>
+<body>
+<div class="section-header">A Journey Through Our Memories Together ✨</div>
+<div id="memorylane">
+    <div class="polaroid top-align" onclick="popMemory(this,'assets/our2.jpg')">
+    <img src="assets/our2.jpg" alt="Memory1">
+</div>
+
+<div class="polaroid" onclick="popMemory(this,'assets/our3.jpg')">
+    <img src="assets/our3.jpg" alt="Memory2">
+</div>
+
+<div class="polaroid" onclick="popMemory(this,'assets/our4.jpg')">
+    <img src="assets/our4.jpg" alt="Memory3">
+</div>
+
+<div class="polaroid top-align" onclick="popMemory(this,'assets/our1.jpg')">
+    <img src="assets/our1.jpg" alt="Memory4">
+</div>
+</div>
+
+<audio id="pop-sound" src="assets/pop.mp3"></audio>
+<!-- Magical Click Hint -->
+<div id="clickHint" style="position: relative; text-align: center; margin-top: 50px;">
+    <!-- ONLY this div is clickable -->
+    <div id="clickText" onclick="goNext()" style="
+        font-size: 1.8rem;
+        color: #fff;
+        display: inline-block;
+        padding: 12px 25px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #ff9a9e, #ff70a6);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        cursor: pointer;
+        animation: bounceHint 1.5s infinite alternate, shimmer 2s infinite;
+    ">
+        ✨ Click here to see more magic  ✨
+    </div>
+
+    <!-- Animated Teddy symbol (not clickable) -->
+    <div style="
+        font-size: 2.2rem;
+        color: #fff;
+        margin-top: 12px;
+        animation: teddyBounce 1s infinite alternate;
+    ">
+        🧸
+    </div>
+</div>
+
+</div>
+
+<script>
+// Floating sparkles background
+function goNext() {
+    window.location.href = 'ourstory.html'; // change to your next page
+}
+
+for(let i=0;i<30;i++){
+    let s = document.createElement('div');
+    s.className='sparkle';
+    s.style.left=Math.random()*100+'vw';
+    s.style.top=Math.random()*100+'vh';
+    s.style.width=(3+Math.random()*4)+'px';
+    s.style.height=(3+Math.random()*4)+'px';
+    document.body.appendChild(s);
+}
+
+// Flying butterflies
+const butterflies = ['🦋','🦋','🦋'];
+butterflies.forEach(b=>{
+    let f = document.createElement('div');
+    f.className='butterfly';
+    f.innerText=b;
+    f.style.left=Math.random()*100+'vw';
+    f.style.top=Math.random()*80+'vh';
+    f.style.animationDuration=(8+Math.random()*5)+'s';
+    document.body.appendChild(f);
+});
+
+// Click polaroid animation
+function popMemory(el,imgSrc){
+    document.getElementById('pop-sound').play();
+
+    // Zoom + bounce effect
+    el.style.transform='scale(1.4) rotate(0deg)';
+    setTimeout(()=>{ el.style.transform='scale(1) rotate(-5deg)'; },1200);
+
+    // Pop emojis/stickers effect
+    const pops = ['💖','🦋','✨','🌟','💫'];
+    for(let i=0;i<6;i++){
+        let e = document.createElement('div');
+        e.className='pop-effect';
+        e.innerText = pops[Math.floor(Math.random()*pops.length)];
+        document.body.appendChild(e);
+        let rect = el.getBoundingClientRect();
+        e.style.left = rect.left + Math.random()*el.offsetWidth + 'px';
+        e.style.top = rect.top + Math.random()*el.offsetHeight + 'px';
+        setTimeout(()=>e.remove(),1000);
+    }
+}
+</script>
+</body>
+</html>

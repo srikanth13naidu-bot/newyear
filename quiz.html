@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cute Quiz</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Shadows Into Light', cursive;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    overflow: hidden;
+}
+
+/* Header */
+.section-header {
+    font-size: 2rem;
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+    text-shadow: 2px 2px 15px #ff70a6;
+}
+
+/* Quiz container */
+#quiz-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+/* Question box */
+#question-box {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    max-width: 90%;
+    text-align: center;
+    position: relative;
+}
+
+/* Cartoon bear */
+#bear {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: bearWave 1.5s infinite alternate;
+}
+
+/* Options */
+.option {
+    background: linear-gradient(135deg, #ff9a9e, #ff70a6);
+    color: #fff;
+    padding: 12px 25px;
+    margin: 10px 0;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+}
+
+.option:hover {
+    transform: scale(1.1);
+}
+
+/* Confetti / hearts */
+.confetti {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: floatUp 1.5s forwards;
+}
+
+/* Animations */
+@keyframes bearWave {
+    0% { transform: rotate(-10deg);}
+    50% { transform: rotate(10deg);}
+    100% { transform: rotate(-10deg);}
+}
+
+@keyframes floatUp {
+    0% { opacity:1; transform: translateY(0) rotate(0deg);}
+    100% { opacity:0; transform: translateY(-150px) rotate(360deg);}
+}
+
+</style>
+</head>
+<body>
+
+<div class="section-header">Guess what I feel about you 💖</div>
+
+<div id="quiz-container">
+    <div id="bear">🧸</div>
+    <div id="question-box">When you entered my life, how did it feel? 😌✨</div>
+
+    <div class="option" onclick="answer('Drama Queen 😎')">Like a drama queen 😎</div>
+    <div class="option" onclick="answer('Cute angry face 😤❤️')">Like your cute angry face 😤❤️</div>
+    <div class="option" onclick="answer('I’m obsessed 😭❤️')">ALL THE TIME, bro I’m obsessed 😭❤️</div>
+</div>
+
+<audio id="pop-sound" src="assets/pop.mp3"></audio>
+
+<script>
+let answered = false;
+
+function answer(text){
+    if(answered) return;
+    answered = true;
+    document.getElementById('pop-sound').play();
+
+    // show confetti/hearts
+    for(let i=0;i<20;i++){
+        let conf = document.createElement('div');
+        conf.className='confetti';
+        const emojis = ['💖','🦋','✨','🌟','💫'];
+        conf.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+        conf.style.left = Math.random()*100+'vw';
+        conf.style.top = '70vh';
+        document.body.appendChild(conf);
+        conf.animate([{transform:'translateY(0) rotate(0deg)'},{transform:'translateY(-200px) rotate(360deg)'}],{duration:1500, easing:'ease-out'});
+        setTimeout(()=>conf.remove(),1500);
+    }
+
+    // Show response text briefly
+    const questionBox = document.getElementById('question-box');
+    questionBox.innerText = `You chose: ${text} 😘`;
+
+    // Show next hint button after 1.5s
+    setTimeout(()=>{ showNextHint(); }, 1600);
+}
+
+function showNextHint(){
+    const hint = document.createElement('div');
+    hint.innerHTML = '✨ Click here to relive our childhood memories ✨';
+    hint.style.cssText = `
+        text-align:center;
+        font-size:1.5rem;
+        color:#fff;
+        margin-top:30px;
+        padding:12px 25px;
+        border-radius:20px;
+        background:linear-gradient(135deg, #ff9a9e, #ff70a6);
+        display:inline-block;
+        cursor:pointer;
+        box-shadow:0 8px 20px rgba(0,0,0,0.3);
+        animation:bounceHint 1.5s infinite alternate, shimmer 2s infinite;
+    `;
+    hint.onclick = ()=>{ window.location.href='ourstory.html'; }; // next page
+    document.getElementById('quiz-container').appendChild(hint);
+}
+</script>
+
+</body>
+</html>
