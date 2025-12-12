@@ -101,11 +101,36 @@ body, html {
     100% { transform: translateY(-200px); opacity:0;}
 }
 
-/* Flying butterflies */
+/* Vertical-only butterflies */
 .butterfly {
-    position: absolute;
+    position: fixed !important;   /* prevents layout shifting */
     font-size: 2rem;
-    animation: fly 10s linear infinite;
+    pointer-events: none;         /* user can never tap/drag them */
+    z-index: 2;
+    animation: flyUpDown 8s linear infinite;
+    opacity: 0;                   /* fade out when exiting screen */
+}
+
+/* Vertical fly animation (top ↕ bottom) */
+@keyframes flyUpDown {
+    0% {
+        transform: translateY(100vh); /* start below screen */
+        opacity: 0;
+    }
+    10% {
+        opacity: 1; /* visible when entering */
+    }
+    50% {
+        transform: translateY(-20vh); /* fly upward */
+        opacity: 1;
+    }
+    90% {
+        opacity: 1; /* visible before exit */
+    }
+    100% {
+        transform: translateY(-120vh); /* leave above screen */
+        opacity: 0; /* fade out when gone */
+    }
 }
 
 @keyframes fly {
@@ -269,17 +294,23 @@ for(let i=0;i<30;i++){
     document.body.appendChild(s);
 }
 
-// Flying butterflies
-const butterflies = ['🦋','🦋','🦋'];
-butterflies.forEach(b=>{
+// Vertical butterflies (random X position)
+const butterflies = ['🦋', '🦋', '🦋'];
+
+butterflies.forEach(b => {
     let f = document.createElement('div');
-    f.className='butterfly';
-    f.innerText=b;
-    f.style.left=Math.random()*100+'vw';
-    f.style.top=Math.random()*80+'vh';
-    f.style.animationDuration=(8+Math.random()*5)+'s';
+    f.className = 'butterfly';
+    f.innerText = b;
+
+    // random X only (because movement is vertical)
+    f.style.left = Math.random() * 90 + 'vw';
+
+    // random animation speed
+    f.style.animationDuration = (6 + Math.random() * 6) + 's';
+
     document.body.appendChild(f);
 });
+
 
 // Click polaroid animation
 function popMemory(el,imgSrc){
@@ -305,4 +336,3 @@ function popMemory(el,imgSrc){
 </script>
 </body>
 </html>
-
