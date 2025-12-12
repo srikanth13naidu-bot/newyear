@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Memory Lane</title>
 <link rel="stylesheet" href="css/style.css">
 <style>
@@ -13,7 +13,8 @@ body, html {
     height: 100%;
     font-family: 'Shadows Into Light', cursive;
     background: linear-gradient(135deg, #fad0c4, #ff9a9e);
-    overflow: hidden;
+    overflow-x: hidden-; /* allow horizontal scroll if needed */
+    overflow-y: auto; 
 }
 
 .section-header {
@@ -30,15 +31,14 @@ body, html {
     100% {opacity:1; transform: translateY(0);}
 }
 
-/* Polaroid container */
 #memorylane {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
     padding: 40px;
     gap: 20px;
-    position: relative;
+    box-sizing: border-box; /* important */
 }
 
 .polaroid {
@@ -177,7 +177,29 @@ img {
   height: 100%;
   overflow: hidden;
 }
+@media (max-width: 768px) {
+    #memorylane {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+        align-items: center;
+    }
 
+    .polaroid {
+        width: 90%;    /* full width on small screens */
+        height: auto;  /* keep aspect ratio */
+    }
+
+    .polaroid img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Ensure all elements stay inside viewport */
+* {
+    box-sizing: border-box;
+}
 </style>
 </head>
 <body>
@@ -283,3 +305,4 @@ function popMemory(el,imgSrc){
 </script>
 </body>
 </html>
+
