@@ -33,30 +33,47 @@ body, html {
     position: relative;
     text-align: center;
     color: #6a0dad;
-    font-size: 4rem;
+    display: inline-block;
+
+    font-size: clamp(2rem, 8vw, 4rem);
     font-weight: bold;
-    line-height: 1.4;
-    padding: 30px 40px;
-    border-radius: 20px;
-    box-shadow: 0 0 60px rgba(255,255,255,0.4);
-    background: rgba(255,255,255,0.05);
-    z-index: 2;
+    line-height: 1.25;
+
+    padding: clamp(16px, 4vw, 28px);
+    border-radius: 25px;
+
     max-width: 90%;
-    word-wrap: break-word;
+    word-wrap: normal;
+    white-space: normal;
+
+    box-shadow: 0 0 60px rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.08);
+
     text-shadow: 2px 2px 15px rgba(255,255,255,0.6);
 }
-
-/* Cursor */
+@media (max-width: 480px) {
+    #typing-container {
+        font-size: 2.1rem;
+        padding: 16px 18px;
+        line-height: 1.2;
+    }
+}
 #cursor {
     display: inline-block;
-    width: 4px;
-    margin-left: 5px;
+    width: 3px;
+    height: 1em;
+    margin-left: 4px;
     background-color: #fff;
+    vertical-align: bottom;
     animation: blink 1s infinite;
 }
+
 @keyframes blink {
     0%,50%,100%{opacity:1;}
     25%,75%{opacity:0;}
+}
+#typing-container br {
+    line-height: 0.9;
 }
 
 /* Next hint */
@@ -111,7 +128,13 @@ body, html {
 <audio id="piano" src="assets/piano.mp3" loop></audio>
 
 <script>
-const message = "I love you, Sanchitha \u2764"; // ❤️ 
+const messageLines = [
+    "I love you ",
+    "Sanchitha ",
+    "\u2764",
+
+];
+  
 let index = 0;
 const typedText = document.getElementById('typedText');
 const heartbeat = document.getElementById('heartbeat');
@@ -121,40 +144,59 @@ const piano = document.getElementById('piano');
 piano.volume = 0.25;
 piano.play();
 
+let lineIndex = 0;
+let charIndex = 0;
+
 function typeLetter(){
-    if(index < message.length){
-        const char = message[index];
-        const span = document.createElement('span');
-        span.textContent = char;
-        // Random soft color
-        span.style.color = `hsl(${Math.random()*50+300}, 80%, 45%)`;
-        span.style.display = 'inline-block';
-        span.style.transform = 'scale(0.5)';
-        span.style.transition = 'transform 0.3s, color 0.3s';
-        typedText.appendChild(span);
+    if(lineIndex < messageLines.length){
+        const currentLine = messageLines[lineIndex];
 
-        // Bounce effect
-        setTimeout(()=>{ span.style.transform='scale(1.2)'; },50);
-        setTimeout(()=>{ span.style.transform='scale(1)'; },300);
+        if(charIndex < currentLine.length){
+            const char = currentLine[charIndex];
 
-        // Floating heart per letter
-        const heart = document.createElement('div');
-        heart.className = 'floating-heart';
-        heart.innerHTML = '&#128150;'; // 💖
-        const rect = span.getBoundingClientRect();
-        heart.style.left = rect.left + rect.width/2 + 'px';
-        heart.style.top = rect.top - 20 + 'px';
-        document.body.appendChild(heart);
-        setTimeout(()=>heart.remove(),1500);
+            const span = document.createElement('span');
+            span.textContent = char;
+            span.style.color = `hsl(${Math.random()*40+320}, 80%, 45%)`;
+            span.style.display = 'inline-block';
+            span.style.transform = 'scale(0.5)';
+            span.style.transition = 'transform 0.3s';
 
-        // Play heartbeat
-        heartbeat.currentTime = 0;
-        heartbeat.play();
+            typedText.appendChild(span);
 
-        index++;
-        setTimeout(typeLetter, 200);
+            setTimeout(()=> span.style.transform='scale(1.2)', 50);
+            setTimeout(()=> span.style.transform='scale(1)', 300);
+
+            // Floating heart
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = '💖';
+            const rect = span.getBoundingClientRect();
+            heart.style.left = rect.left + rect.width/2 + 'px';
+            heart.style.top = rect.top - 20 + 'px';
+            document.body.appendChild(heart);
+            setTimeout(()=>heart.remove(),1500);
+
+            heartbeat.currentTime = 0;
+            heartbeat.play();
+
+            charIndex++;
+            setTimeout(typeLetter, 180);
+
+        } else {
+            // Line finished → move to next line
+            typedText.appendChild(document.createElement('br'));
+            charIndex = 0;
+            lineIndex++;
+            setTimeout(typeLetter, 400);
+        }
+
+    } else {
+        
+            const cursor = document.getElementById('cursor');
+        if (cursor) cursor.remove();
+        }
     }
-}
+
 
 // Start typing after short delay
 setTimeout(typeLetter, 1000);
@@ -210,3 +252,4 @@ document.body.addEventListener('click', e=>{
 
 </body>
 </html>
+
