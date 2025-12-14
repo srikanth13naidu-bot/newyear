@@ -104,16 +104,17 @@ button#no:hover { animation:jump 0.5s infinite alternate;}
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0);
+    transform: translate(-50%, -50%) scale(0.2);
     z-index: 10;
-     opacity: 0;          /* 🔒 fully hidden */
-    pointer-events:none;
+    opacity: 0;
+    pointer-events: none;
 
-    max-width: 90%;
-    padding: 45px 50px;
+    width: 90%;
+    max-width: 900px;
+    padding: clamp(25px, 5vw, 50px);
     border-radius: 35px;
 
-    font-size: 2.8rem;
+    font-size: clamp(1.6rem, 4.8vw, 2.8rem);
     line-height: 1.5;
     text-align: center;
     font-weight: 600;
@@ -140,11 +141,25 @@ button#no:hover { animation:jump 0.5s infinite alternate;}
         0 0 25px #ff9acb,
         0 0 45px #ff3c97;
 
+
     animation:
         heartPulse 3.5s ease-in-out infinite,
         glowShift 6s ease-in-out infinite;
 }
-
+@keyframes magicReveal {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
+    }
+    65% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
 /* 💓 Breathing Heart Effect */
 @keyframes heartPulse {
     0%   { transform: translate(-50%, -50%) scale(1); }
@@ -300,25 +315,26 @@ function yesClicked(){
 
     const magicText = document.getElementById('magicText');
 
-    // Reset state
+    // Reset animation state
     magicText.style.opacity = "0";
     magicText.style.animation = "none";
 
-    // Trigger reflow (important for restart animation)
+    // Force reflow
     magicText.offsetHeight;
 
-    // Start romantic reveal
-    magicText.style.opacity = "1";
-    magicText.style.animation = "loveReveal 1.8s ease-out forwards";
+    // Start reveal
+    magicText.style.animation = 
+        "magicReveal 2.2s ease-out forwards, " +
+        "heartPulse 3.5s ease-in-out infinite 2.2s, " +
+        "glowShift 6s ease-in-out infinite 2.2s";
 
-    // Continuous burst while revealing
+    // Gentle hearts while revealing
     let burstInterval = setInterval(createBurst, 180);
 
     setTimeout(() => {
         clearInterval(burstInterval);
         document.getElementById('revisitBtn').style.display = "block";
-    }, 1800);
-
+    }, 2200);
 
 
     // Add romantic floating hearts
@@ -361,4 +377,5 @@ function addMagicHearts() {
 
 </body>
 </html>
+
 
