@@ -99,23 +99,82 @@ button#no:hover { animation:jump 0.5s infinite alternate;}
     100%{transform:translateY(0);}
 }
 
-/* ---------------- Magic Text ---------------- */
+/* 💖 Romantic Final Message – Unique Design */
 #magicText {
-    font-size:3rem;
-    font-weight:bold;
-    color:#ff0055;
-    text-shadow:0 0 20px #fff,0 0 40px #ff3c97,0 0 60px #ff70a6;
-    position:fixed;     /* stays centered */
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%) scale(0);
-    text-align:center;
-    z-index:10;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 10;
+     opacity: 0;          /* 🔒 fully hidden */
+    pointer-events:none;
+
+    max-width: 90%;
+    padding: 45px 50px;
+    border-radius: 35px;
+
+    font-size: 2.8rem;
+    line-height: 1.5;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+
+    color: #fff;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.25),
+        rgba(255, 170, 200, 0.15)
+    );
+
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.3);
+
+    box-shadow:
+        0 0 30px rgba(255, 120, 170, 0.8),
+        0 0 80px rgba(255, 60, 150, 0.9),
+        0 0 140px rgba(255, 120, 200, 1);
+
+    text-shadow:
+        0 0 10px #fff,
+        0 0 25px #ff9acb,
+        0 0 45px #ff3c97;
+
+    animation:
+        heartPulse 3.5s ease-in-out infinite,
+        glowShift 6s ease-in-out infinite;
+}
+
+/* 💓 Breathing Heart Effect */
+@keyframes heartPulse {
+    0%   { transform: translate(-50%, -50%) scale(1); }
+    50%  { transform: translate(-50%, -50%) scale(1.08); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ✨ Glow shimmer */
+@keyframes glowShift {
+    0% {
+        box-shadow:
+            0 0 25px rgba(255,120,170,0.6),
+            0 0 60px rgba(255,60,150,0.7);
+    }
+    50% {
+        box-shadow:
+            0 0 45px rgba(255,180,220,1),
+            0 0 140px rgba(255,60,150,1);
+    }
+    100% {
+        box-shadow:
+            0 0 25px rgba(255,120,170,0.6),
+            0 0 60px rgba(255,60,150,0.7);
+    }
 }
 
 @media (max-width:600px) {
     #magicText {
-        font-size:2rem;
+        font-size: 1.9rem;
+        padding: 30px;
     }
 }
 
@@ -146,6 +205,20 @@ button#no:hover { animation:jump 0.5s infinite alternate;}
     display: none;   /* hidden by default */
     z-index: 20;
     font-family:'Shadows Into Light', cursive;
+}
+@keyframes loveReveal {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
+    }
+    60% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.15);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
 
 </style>
@@ -178,8 +251,13 @@ button#no:hover { animation:jump 0.5s infinite alternate;}
     <button id="no" onclick="noClicked()">NO</button>
 </div>
 
-<!-- ❤️ Final Magic Text -->
-<div id="magicText">I Love You BABY ❤️😘</div>
+<div id="magicText">
+   Our story just opened its most beautiful chapter ❤️<br>
+    Two hearts choosing each other, every single day,<br>
+    hand in hand — forever begins with us ♾️✨,<br>
+    I LOVE YOU FOREVER 💕🤍
+</div>
+
 
 <audio id="piano" src="assets/piano.mp3" loop autoplay></audio>
 <button id="revisitBtn" onclick="goNext()">Revisit ❤️</button>
@@ -215,25 +293,36 @@ function createBurst(){
 let clicked=false;
 function yesClicked(){
     if(clicked) return;
-    clicked=true;
+    clicked = true;
 
-    document.getElementById('yes').disabled=true;
-    document.getElementById('no').disabled=true;
+    document.getElementById('yes').disabled = true;
+    document.getElementById('no').disabled = true;
 
     const magicText = document.getElementById('magicText');
-    let scale=0;
 
-    const zoomInterval=setInterval(()=>{
-        scale+=0.05;
-        magicText.style.transform=`translate(-50%, -50%) scale(${scale})`;
-        createBurst();
-        if(scale>=1){
-            clearInterval(zoomInterval);
+    // Reset state
+    magicText.style.opacity = "0";
+    magicText.style.animation = "none";
 
-            // Show revisit button
-            document.getElementById('revisitBtn').style.display = "block";
-        }
-    },50);
+    // Trigger reflow (important for restart animation)
+    magicText.offsetHeight;
+
+    // Start romantic reveal
+    magicText.style.opacity = "1";
+    magicText.style.animation = "loveReveal 1.8s ease-out forwards";
+
+    // Continuous burst while revealing
+    let burstInterval = setInterval(createBurst, 180);
+
+    setTimeout(() => {
+        clearInterval(burstInterval);
+        document.getElementById('revisitBtn').style.display = "block";
+    }, 1800);
+
+
+
+    // Add romantic floating hearts
+    addMagicHearts();
 }
 
 
@@ -248,8 +337,28 @@ function noClicked(){
 function goNext() {
     window.location.href = "index.html";
 }
+function addMagicHearts() {
+    const magicText = document.getElementById('magicText');
+    const icons = ['❤️','💖','💞','✨','🌸','💐'];
+
+    for (let i = 0; i < 8; i++) {
+        const heart = document.createElement('span');
+        heart.innerText = icons[Math.floor(Math.random() * icons.length)];
+
+        heart.style.position = 'absolute';
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.top = Math.random() * 100 + '%';
+        heart.style.fontSize = (18 + Math.random() * 18) + 'px';
+        heart.style.opacity = 0.7;
+        heart.style.pointerEvents = 'none';
+        heart.style.animation = 'floatUp 2.5s ease-in-out infinite';
+
+        magicText.appendChild(heart);
+    }
+}
 
 </script>
 
 </body>
 </html>
+
