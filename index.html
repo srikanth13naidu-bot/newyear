@@ -4,31 +4,117 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy New Year</title>
-<link rel="stylesheet" href="css/style.css">
 <style>
-/* Reset and basic styling */
 body, html {
     margin: 0;
     padding: 0;
     width: 100%;
     min-height: 100%;
     font-family: 'Shadows Into Light', cursive;
-    overflow-y: auto; /* Enable vertical scrolling */
-    overflow-x: hidden;
+    overflow-x: hidden; /* allow vertical scroll if needed */
     background: linear-gradient(135deg, #ff9a9e, #fad0c4);
 }
 
-/* Background grid of images */
+#newyear {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* Headings */
+#newyear h1 {
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 2px 2px 10px #ff70a6;
+    margin-bottom: 20px;
+}
+
+#newyear p {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+/* Hero Image - fixed size */
+#newyear img.herpic {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    filter: blur(3px);
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+.herpic {
+    filter: blur(6px);
+    transition: all 1.5s ease;
+    cursor: pointer;
+}
+.herpic.reveal {
+    filter: blur(0);
+    transform: scale(1.05);
+}
+
+
+/* Button */
+button {
+    padding: 12px 30px;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: #ff70a6;
+    color: white;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+/* Teddy animation (if any) */
+#newyear img.teddy {
+    width: 100px;
+    height: 100px;
+    animation: bounce 1s infinite alternate;
+    margin-bottom: 20px;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+
+/* Sparkles */
+#sparkles .sparkle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    animation: sparkle 2s infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.5) translate(20px, 20px); }
+}
+
+/* Background grid - soft blurred images */
 .bg-grid {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    overflow: hidden;
     z-index: -2;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-auto-rows: minmax(200px, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: 10px;
     padding: 10px;
     opacity: 0.45;
@@ -43,101 +129,61 @@ body, html {
     animation: slowMove 8s infinite alternate ease-in-out;
 }
 
-/* Smooth movement animation */
 @keyframes slowMove {
     0% { transform: scale(1) translateY(0); }
     100% { transform: scale(1.08) translateY(-10px); }
 }
-
-/* Main content section */
-#newyear {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 50px 20px;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-}
-
-#newyear h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
-    color: #fff;
-    text-shadow: 2px 2px 10px #ff70a6;
-    margin-bottom: 20px;
-}
-
-#newyear p {
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-    color: #fff;
-    margin-bottom: 30px;
-}
-
-#newyear img.herpic {
-    width: clamp(150px, 25vw, 300px);
-    height: clamp(150px, 25vw, 300px);
-    border-radius: 50%;
-    filter: blur(3px);
-    margin-bottom: 20px;
-    object-fit: cover;
-}
-
-button {
-    padding: 15px 30px;
-    font-size: clamp(1rem, 2vw, 1.5rem);
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    background: #ff70a6;
-    color: white;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-    transition: all 0.3s;
-}
-button:hover {
-    transform: scale(1.1);
-}
-
-/* Sparkles */
-#sparkles .sparkle {
-    position: absolute;
+.firework {
+    position: fixed;
     width: 6px;
     height: 6px;
-    background: #fff;
     border-radius: 50%;
-    animation: sparkle 2s infinite;
-}
-@keyframes sparkle {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(0.5) translate(20px, 20px); }
+    background: white;
+    pointer-events: none;
+    animation: explode 1.2s ease-out forwards;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    #newyear {
-        padding: 40px 10px;
+@keyframes explode {
+    0% {
+        transform: scale(0);
+        opacity: 1;
     }
-    #newyear img.herpic {
-        width: 200px;
-        height: 200px;
+    100% {
+        transform: translate(var(--x), var(--y)) scale(1);
+        opacity: 0;
     }
+}
+.name-glow {
+    font-size: 2.4rem;
+    margin-bottom: 15px;
+    color: #fff;
+    animation: glowName 2.5s infinite alternate;
+}
+
+@keyframes glowName {
+    0% {
+        text-shadow: 0 0 10px #ff9a9e;
+    }
+    100% {
+        text-shadow:
+            0 0 20px #ff70a6,
+            0 0 40px #ff4d6d,
+            0 0 80px #ff9a9e;
+    }
+}
+
+
+/* Scrollable page for small screens */
+html, body {
+    overflow-y: auto;
 }
 </style>
 </head>
 <body>
 
-<!-- Background images grid -->
-<div class="bg-grid">
-    <img src="assets/background1.jpg" alt="">
-    <img src="assets/background2.jpg" alt="">
-    <img src="assets/background3.jpg" alt="">
-    <img src="assets/background4.jpg" alt="">
-    <img src="assets/background5.jpg" alt="">
-</div>
-
 <section id="newyear">
-    <h1>🎉 Happy New Year 2026! 🎉</h1>
-    <p>Can we start our 2026 together? 💖</p>
+    <h1 class="magic-name">🎉 Happy New Year 2026 🎉</h1>
+<p class="name-glow">Sanchitha 💖</p>
     <img src="assets/background.jpg" alt="Her Pic" class="herpic">
     <button onclick="nextSection()">Start ✨</button>
     <div id="sparkles"></div>
@@ -154,8 +200,62 @@ for (let i = 0; i < 30; i++) {
     s.style.left = Math.random() * 100 + '%';
     sparklesContainer.appendChild(s);
 }
+function launchFirework() {
+    const colors = ['#ff4d6d','#ffd166','#ff9a9e','#ffffff'];
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * window.innerHeight * 0.5;
 
-/* Start button: play music & go to next section */
+    for (let i = 0; i < 24; i++) {
+        const fw = document.createElement("div");
+        fw.className = "firework";
+        fw.style.left = x + "px";
+        fw.style.top = y + "px";
+        fw.style.background = colors[Math.floor(Math.random() * colors.length)];
+        fw.style.setProperty("--x", `${Math.random()*200-100}px`);
+        fw.style.setProperty("--y", `${Math.random()*200-100}px`);
+        document.body.appendChild(fw);
+        setTimeout(() => fw.remove(), 1200);
+    }
+}
+setInterval(launchFirework, 2200);
+
+const herPic = document.querySelector(".herpic");
+herPic.addEventListener("click", () => {
+    herPic.classList.add("reveal");
+});
+function fadeInMusic() {
+    const music = document.getElementById("bg-music");
+    music.volume = 0;
+    music.play();
+
+    let vol = 0;
+    const fade = setInterval(() => {
+        vol += 0.05;
+        music.volume = Math.min(vol, 0.6);
+        if (vol >= 0.6) clearInterval(fade);
+    }, 200);
+}
+
+function nextSection() {
+    fadeInMusic();
+    setTimeout(() => {
+        window.location.href = "hearts.html";
+    }, 1200);
+}
+setInterval(() => {
+    const h = document.createElement("div");
+    h.innerText = "💖";
+    h.style.position = "fixed";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.bottom = "-20px";
+    h.style.fontSize = "1.5rem";
+    h.style.animation = "floatUp 4s linear forwards";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 4000);
+}, 600);
+
+
+/* Start button: play music & next section */
 function nextSection() {
     document.getElementById('bg-music').play();
     window.location.href = 'hearts.html';
@@ -164,3 +264,4 @@ function nextSection() {
 
 </body>
 </html>
+
