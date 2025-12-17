@@ -189,6 +189,11 @@ body, html {
     position: relative;
     z-index: 2;
 }
+#nextText {
+    text-align: center;
+    line-height: 1.4;
+    font-weight: 500;
+}
 
 </style>
 </head>
@@ -199,8 +204,9 @@ body, html {
     <span id="typedText"></span><span id="cursor"></span>
 </div>
 
-<div id="nextHint">
-    <div id="nextText" onclick="goNext()">💖 Click here to see your surprise 💖</div>
+<div id="nextText" onclick="goNext()">
+    If your heart smiled even a little…<br>
+    let me show you what comes next 💖
 </div>
 
 <audio id="heartbeat" src="assets/heartbeat.mp3"></audio>
@@ -377,6 +383,7 @@ function goNext() {
 
 </body>
 </html>
+
 
 
 
