@@ -112,9 +112,88 @@ body, html {
     0% { transform: translateY(0) scale(1); opacity:1; }
     100% { transform: translateY(-100px) scale(1.5); opacity:0;}
 }
+/* Cute random collage */
+#photo-collage {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 18px;
+    gap: 14px;
+    overflow: hidden;
+}
+
+/* Invisible layout cell */
+.photo-cell {
+    width: 18%;
+    height: 22%;
+    position: relative;
+}
+
+/* Photo tile */
+.photo-tile {
+    position: absolute;
+    inset: 12%;
+    background-size: cover;
+    background-position: center;
+
+    border-radius: 22px;
+
+    opacity: 0.32;
+    box-shadow:
+        0 6px 16px rgba(255,120,170,0.35);
+
+    filter: saturate(1.15);
+
+    transform:
+        rotate(var(--rot))
+        translate(var(--tx), var(--ty));
+
+    animation: floatSoft 12s ease-in-out infinite alternate;
+}
+
+@keyframes floatSoft {
+    from {
+        transform:
+            rotate(var(--rot))
+            translate(var(--tx), var(--ty));
+    }
+    to {
+        transform:
+            rotate(calc(var(--rot) + 2deg))
+            translate(calc(var(--tx) + 5px), calc(var(--ty) - 5px));
+    }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .photo-cell {
+        width: 22%;
+        height: 20%;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .photo-cell {
+        width: 30%;
+        height: 18%;
+    }
+}
+
+/* Keep main content above collage */
+#typing-container,
+#nextHint {
+    position: relative;
+    z-index: 2;
+}
+
 </style>
 </head>
 <body>
+<div id="photo-collage"></div>
 
 <div id="typing-container">
     <span id="typedText"></span><span id="cursor"></span>
@@ -248,8 +327,52 @@ document.body.addEventListener('click', e=>{
     document.body.appendChild(flower);
     setTimeout(()=>flower.remove(),1500);
 });
+/* Cute scattered collage with gaps */
+const collage = document.getElementById('photo-collage');
+
+const photos = [
+    'assets/typher1.jpg',
+    'assets/typher2.jpg',
+    'assets/typher3.jpg',
+    'assets/typher4.jpg',
+    'assets/typher5.jpg',
+    'assets/typher6.jpg',
+    'assets/typher7.jpg',
+    'assets/typher8.jpg'
+];
+
+// Adjust density
+const cols = window.innerWidth < 480 ? 3 :
+             window.innerWidth < 768 ? 4 : 5;
+
+const rows = 6;
+const total = rows * cols;
+
+for (let i = 0; i < total; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'photo-cell';
+
+    const tile = document.createElement('div');
+    tile.className = 'photo-tile';
+
+    tile.style.backgroundImage =
+        `url(${photos[i % photos.length]})`;
+
+    tile.style.setProperty('--rot', `${Math.random()*10 - 5}deg`);
+    tile.style.setProperty('--tx', `${Math.random()*12 - 6}px`);
+    tile.style.setProperty('--ty', `${Math.random()*12 - 6}px`);
+
+    tile.style.animationDuration =
+        (10 + Math.random()*6) + 's';
+
+    cell.appendChild(tile);
+    collage.appendChild(cell);
+}
+
+
 </script>
 
 </body>
 </html>
+
 
