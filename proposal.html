@@ -3,334 +3,495 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Typing Proposal</title>
-<link rel="stylesheet" href="css/style.css">
+<title>My Proposal</title>
+
 <style>
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100vh;
-    font-family: 'Shadows Into Light', cursive;
-    overflow: hidden;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    animation: bgGradient 15s infinite alternate;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+/* ---------------- GLOBAL FIXES ---------------- */
+html, body {
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    overflow-x: hidden;   /* ❌ horizontal scroll removed */
+    overflow-y: auto;     /* ✅ only vertical scroll when needed */
+    font-family:'Shadows Into Light', cursive;
+    background: radial-gradient(circle, #ff9a9e, #fad0c4, #ff70a6);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    box-sizing:border-box;
+    padding:20px;
 }
 
-/* Animated gradient background */
-@keyframes bgGradient {
-    0% { background: linear-gradient(135deg, #ff9a9e, #fad0c4);}
-    50% { background: linear-gradient(135deg, #fbc2eb, #a6c1ee);}
-    100% { background: linear-gradient(135deg, #ff9a9e, #fad0c4);}
-}
-
-/* Typing container */
-#typing-container {
-    position: relative;
-    text-align: center;
-    color: #6a0dad;
-    display: inline-block;
-
-    font-size: clamp(2rem, 8vw, 4rem);
-    font-weight: bold;
-    line-height: 1.25;
-
-    padding: clamp(16px, 4vw, 28px);
-    border-radius: 25px;
-
-    max-width: 90%;
-    word-wrap: normal;
-    white-space: normal;
-
-    box-shadow: 0 0 60px rgba(255,255,255,0.4);
-    background: rgba(255,255,255,0.08);
-
-    text-shadow: 2px 2px 15px rgba(255,255,255,0.6);
-}
-@media (max-width: 480px) {
-    #typing-container {
-        font-size: 2.1rem;
-        padding: 16px 18px;
-        line-height: 1.2;
+/* Make layout adjust nicely on small screens */
+@media (max-width: 600px) {
+    html, body {
+        padding:10px;
     }
 }
-#cursor {
-    display: inline-block;
-    width: 3px;
-    height: 1em;
-    margin-left: 4px;
-    background-color: #fff;
-    vertical-align: bottom;
-    animation: blink 1s infinite;
-}
 
-@keyframes blink {
-    0%,50%,100%{opacity:1;}
-    25%,75%{opacity:0;}
-}
-#typing-container br {
-    line-height: 0.9;
-}
+/* ---------------- Romantic Text ---------------- */
+#romanticText {
+    font-size:1.8rem;
+    color:#fff;
+    text-align:center;
+    line-height:2.3rem;
+    text-shadow: 0 0 15px #ff70a6;
+    width:90%;
+    max-width:800px;
+    opacity:0;
+    margin-top:30px;
+    margin: 60px auto 0 auto;
+    width: 100%;
+    max-width: 820px;
 
-/* Next hint */
-#nextHint {
-    margin-top: 50px;
-    z-index: 2;
-}
-#nextText {
-    font-size: 1.5rem;
+    text-align: center;
+
+    font-size: 1.8rem;
+    line-height: 2.3rem;
     color: #fff;
-    display: inline-block;
-    padding: 12px 25px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #ff9a9e, #ff70a6);
-    cursor: pointer;
-    animation: bounce 1.5s infinite alternate, shimmer 2s infinite;
-}
-@keyframes bounce {
-    0% { transform: translateY(0);}
-    100% { transform: translateY(-10px);}
-}
-@keyframes shimmer {
-    0% { text-shadow: 0 0 5px #fff, 0 0 10px #ff9a9e;}
-    50% { text-shadow: 0 0 15px #fff,0 0 20px #ff70a6;}
-    100% { text-shadow: 0 0 5px #fff,0 0 10px #ff9a9e;}
+
+    text-shadow: 0 0 15px #ff70a6;
+    opacity: 0;
 }
 
-/* Floating hearts & sparkles */
-.floating-heart, .sparkle {
-    position: absolute;
-    font-size: 1.5rem;
+#romanticText h1 {
+    font-size:2.3rem;
+}
+
+@media (max-width: 600px) {
+    #romanticText {
+        font-size:1.4rem;
+        line-height:2rem;
+    }
+    #romanticText h1 {
+        font-size:1.8rem;
+    }
+}
+
+/* ---------------- Buttons ---------------- */
+#buttons {
+    margin-top:40px;
+    display:none;
+}
+
+button {
+    font-family:'Shadows Into Light', cursive;
+    font-size:1.5rem;
+    padding:15px 35px;
+    margin:0 20px;
+    border-radius:25px;
+    border:none;
+    cursor:pointer;
+    color:#fff;
+    background:linear-gradient(135deg, #ff9a9e, #ff70a6);
+    box-shadow:0 0 20px rgba(255,255,255,0.6);
+}
+
+@media (max-width:600px) {
+    button {
+        padding:12px 25px;
+        font-size:1.2rem;
+        margin:10px;
+    }
+}
+
+/* Button animations */
+button#yes:hover { animation:shake 0.5s infinite alternate;}
+@keyframes shake {
+    0% {transform:translateX(0);}
+    50% {transform:translateX(-10px);}
+    100%{transform:translateX(10px);}
+}
+button#no:hover { animation:jump 0.5s infinite alternate;}
+@keyframes jump {
+    0% {transform:translateY(0);}
+    50% {transform:translateY(-20px);}
+    100%{transform:translateY(0);}
+}
+
+/* 💖 Romantic Final Message – Unique Design */
+#magicText {
+      position: absolute;
+    inset: 0;                 /* full screen overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     z-index: 30;
+ transform-origin: center center;
+    opacity: 0;
     pointer-events: none;
-    animation: floatUp 1.5s ease-out forwards;
+
+    opacity: 0;
+    pointer-events: none;
+    z-index: 30;
+
+    transform: scale(0.3);
+
+    width: 100%;
+    max-width: 900px;
+    padding: clamp(25px, 5vw, 50px);
+    border-radius: 35px;
+     box-sizing: border-box; 
+
+    font-size: clamp(1.6rem, 4.8vw, 2.8rem);
+    line-height: 1.5;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+
+    color: #fff;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.25),
+        rgba(255, 170, 200, 0.15)
+    );
+
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.3);
+
+    box-shadow:
+        0 0 30px rgba(255, 120, 170, 0.8),
+        0 0 80px rgba(255, 60, 150, 0.9),
+        0 0 140px rgba(255, 120, 200, 1);
+
+    text-shadow:
+        0 0 10px #fff,
+        0 0 25px #ff9acb,
+        0 0 45px #ff3c97;
+
+
+    animation:
+        heartPulse 3.5s ease-in-out infinite,
+        glowShift 6s ease-in-out infinite;
 }
+#magicText > div {
+    width: min(90%, 880px);
+    padding: clamp(24px, 5vw, 38px);
+
+    border-radius: 32px;
+    text-align: center;
+
+    font-size: clamp(1.5rem, 4.6vw, 2.5rem);
+    line-height: 1.55;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+
+    color: #fff;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.28),
+        rgba(255,170,200,0.18)
+    );
+
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.3);
+
+    box-shadow:
+        0 0 28px rgba(255,120,170,0.9),
+        0 0 80px rgba(255,60,150,1);
+
+    text-shadow:
+        0 0 10px #fff,
+        0 0 22px #ff9acb,
+        0 0 38px #ff3c97;
+}
+@keyframes magicGrowFromTitle {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
+    }
+    60% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+@keyframes magicGrowOverText {
+    0% {
+        transform: scale(0.2);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.08);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+/* 💓 Breathing Heart Effect */
+@keyframes heartPulse {
+    0%   { transform: translate(-50%, -50%) scale(1); }
+    50%  { transform: translate(-50%, -50%) scale(1.08); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ✨ Glow shimmer */
+@keyframes glowShift {
+    0% {
+        box-shadow:
+            0 0 25px rgba(255,120,170,0.6),
+            0 0 60px rgba(255,60,150,0.7);
+    }
+    50% {
+        box-shadow:
+            0 0 45px rgba(255,180,220,1),
+            0 0 140px rgba(255,60,150,1);
+    }
+    100% {
+        box-shadow:
+            0 0 25px rgba(255,120,170,0.6),
+            0 0 60px rgba(255,60,150,0.7);
+    }
+}
+
+@media (max-width:600px) {
+    #magicText {
+        font-size: 1.9rem;
+        padding: 30px;
+    }
+}
+
+/* ---------------- Floating Effects ---------------- */
+.burst {
+    position:fixed;
+    font-size:2rem;
+    pointer-events:none;
+    animation:floatUp linear forwards;
+}
+
 @keyframes floatUp {
-    0% { transform: translateY(0) scale(1); opacity:1; }
-    100% { transform: translateY(-100px) scale(1.5); opacity:0;}
+    0% { transform:translateY(0) scale(1); opacity:1; }
+    100% { transform:translateY(-200px) scale(1.5); opacity:0; }
 }
-/* Cute random collage */
-#photo-collage {
+#revisitBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 25px;
+    font-size: 1.3rem;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #ff70a6, #ff0055);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255,255,255,0.7);
+    display: none;   /* hidden by default */
+    z-index: 20;
+    font-family:'Shadows Into Light', cursive;
+}
+@keyframes loveReveal {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
+    }
+    60% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.15);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+#memoryLayer {
     position: fixed;
     inset: 0;
-    z-index: 0;
+    z-index: 1;                /* stays behind text */
     pointer-events: none;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 18px;
-    gap: 14px;
     overflow: hidden;
 }
 
-/* Invisible layout cell */
-.photo-cell {
-    width: 18%;
-    height: 22%;
-    position: relative;
-}
-
-/* Photo tile */
-.photo-tile {
+/* Polaroid card */
+.memory {
     position: absolute;
-    inset: 12%;
-    background-size: cover;
-    background-position: center;
 
-    border-radius: 22px;
+    width: clamp(70px, 12vw, 120px);
+    aspect-ratio: 3 / 4;
 
-    opacity: 0.32;
+    background: rgba(255,255,255,0.9);
+    border-radius: 14px;
+
+    padding: 6px 6px 14px;
     box-shadow:
-        0 6px 16px rgba(255,120,170,0.35);
+        0 8px 22px rgba(255,120,170,0.25);
 
-    filter: saturate(1.15);
+    opacity: 0.35;             /* 👈 very important */
+    filter: blur(0.3px);
 
-    transform:
-        rotate(var(--rot))
-        translate(var(--tx), var(--ty));
-
-    animation: floatSoft 12s ease-in-out infinite alternate;
+    transform: rotate(var(--rot));
 }
 
-@keyframes floatSoft {
-    from {
-        transform:
-            rotate(var(--rot))
-            translate(var(--tx), var(--ty));
-    }
-    to {
-        transform:
-            rotate(calc(var(--rot) + 2deg))
-            translate(calc(var(--tx) + 5px), calc(var(--ty) - 5px));
-    }
+/* Image safety */
+.memory img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;        /* ✅ no face cutting */
+    border-radius: 10px;
+    background: #ffe6ef;
 }
 
-/* Tablet */
-@media (max-width: 768px) {
-    .photo-cell {
-        width: 22%;
-        height: 20%;
-    }
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-    .photo-cell {
-        width: 30%;
-        height: 18%;
-    }
-}
-
-/* Keep main content above collage */
-#typing-container,
-#nextHint {
+/* Keep all text ABOVE images */
+#romanticText {
     position: relative;
-    z-index: 2;
+    z-index: 10;
+    text-align: center;
+}
+#buttons {
+    margin-top: 40px;
+    z-index: 10;
+    position: relative;
+}
+
+
+/* Only revisit button should be fixed bottom-right */
+#revisitBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 30;
+}
+button {
+    pointer-events: auto;
+    cursor: pointer;
 }
 
 </style>
+
 </head>
 <body>
-<div id="photo-collage"></div>
+    <div id="memoryLayer"></div>
 
-<div id="typing-container">
-    <span id="typedText"></span><span id="cursor"></span>
+<div id="romanticWrapper" style="position: relative; display: inline-block; text-align: center; z-index: 5;">
+    <div id="romanticText">
+        <h1>For My Sanchitha ❤️</h1>
+        <p>
+            From the moment you walked into my life, everything became brighter.  
+            You make the simplest days feel special and the smallest moments unforgettable.  
+            I love the way you smile, the way you talk, and the way your presence brings peace into my world.
+        </p>
+        <p>
+            I want to spend all my tomorrows holding your hand,  
+            laughing with you, caring for you,  
+            and being the reason you feel loved every single day.  
+            My heart has already chosen you—completely and forever.
+        </p>
+    </div>
+
+<!-- ❤️ Love Question -->
+<div id="buttons">
+    <div style="color:#fff;font-size:2rem;margin-bottom:20px;">“Shall we begin our forever?” ♾️❤️</div>
+    <button id="yes" onclick="yesClicked()">YES</button>
+    <button id="no" onclick="noClicked()">NO</button>
 </div>
 
-<div id="nextHint">
-    <div id="nextText" onclick="goNext()">💖 Click here to see your surprise 💖</div>
+<div id="magicText">
+  <div>
+    Our story just opened its most beautiful chapter ❤️<br>
+    Two hearts choosing each other, every single day,<br>
+    hand in hand — forever begins with us ♾️✨<br>
+    I LOVE YOU FOREVER 💕🤍
+  </div>
 </div>
 
-<audio id="heartbeat" src="assets/heartbeat.mp3"></audio>
-<audio id="piano" src="assets/piano.mp3" loop></audio>
+
+<audio id="piano" src="assets/piano.mp3" loop autoplay></audio>
+<button id="revisitBtn" onclick="goNext()">Revisit ❤️</button>
+
 
 <script>
-const messageLines = [
-    "I love you ",
-    "Sanchitha ",
-    "\u2764",
-
-];
-  
-let index = 0;
-const typedText = document.getElementById('typedText');
-const heartbeat = document.getElementById('heartbeat');
-const piano = document.getElementById('piano');
-
-// Play piano softly
-piano.volume = 0.25;
-piano.play();
-
-let lineIndex = 0;
-let charIndex = 0;
-
-function typeLetter(){
-    if(lineIndex < messageLines.length){
-        const currentLine = messageLines[lineIndex];
-
-        if(charIndex < currentLine.length){
-            const char = currentLine[charIndex];
-
-            const span = document.createElement('span');
-            span.textContent = char;
-            span.style.color = `hsl(${Math.random()*40+320}, 80%, 45%)`;
-            span.style.display = 'inline-block';
-            span.style.transform = 'scale(0.5)';
-            span.style.transition = 'transform 0.3s';
-
-            typedText.appendChild(span);
-
-            setTimeout(()=> span.style.transform='scale(1.2)', 50);
-            setTimeout(()=> span.style.transform='scale(1)', 300);
-
-            // Floating heart
-            const heart = document.createElement('div');
-            heart.className = 'floating-heart';
-            heart.innerHTML = '💖';
-            const rect = span.getBoundingClientRect();
-            heart.style.left = rect.left + rect.width/2 + 'px';
-            heart.style.top = rect.top - 20 + 'px';
-            document.body.appendChild(heart);
-            setTimeout(()=>heart.remove(),1500);
-
-            heartbeat.currentTime = 0;
-            heartbeat.play();
-
-            charIndex++;
-            setTimeout(typeLetter, 180);
-
-        } else {
-            // Line finished → move to next line
-            typedText.appendChild(document.createElement('br'));
-            charIndex = 0;
-            lineIndex++;
-            setTimeout(typeLetter, 400);
-        }
-
-    } else {
-        
-            const cursor = document.getElementById('cursor');
-        if (cursor) cursor.remove();
-        }
+// Fade-in romantic text
+const romanticText = document.getElementById('romanticText');
+let opacity = 0;
+const fadeIn = setInterval(()=>{
+    opacity += 0.02;
+    romanticText.style.opacity = opacity;
+    if(opacity>=1){
+        clearInterval(fadeIn);
+        document.getElementById('buttons').style.display='block';
     }
+},50);
 
-
-// Start typing after short delay
-setTimeout(typeLetter, 1000);
-
-// Click sparkles anywhere
-document.body.addEventListener('click', e=>{
-    const sparkle = document.createElement('div');
-    sparkle.className='sparkle';
-    sparkle.innerText='✨';
-    sparkle.style.left = e.clientX + 'px';
-    sparkle.style.top = e.clientY + 'px';
-    document.body.appendChild(sparkle);
-    setTimeout(()=>sparkle.remove(),1000);
-});
-
-// Navigate to proposal page
-function goNext(){
-    window.location.href='proposal.html';
+// Floating heart/flower effects
+function createBurst(){
+    const emojis=['💖','🌸','💫','🌷','💐'];
+    const burst=document.createElement('div');
+    burst.className='burst';
+    burst.innerText=emojis[Math.floor(Math.random()*emojis.length)];
+    burst.style.left=(window.innerWidth/2 + (Math.random()-0.5)*100)+'px';
+    burst.style.top=(window.innerHeight/2 + (Math.random()-0.5)*50)+'px';
+    burst.style.fontSize=(20 + Math.random()*25)+'px';
+    document.body.appendChild(burst);
+    setTimeout(()=>burst.remove(),2000);
 }
-// Floating flower petals in background
-for(let i=0; i<25; i++){
-    const petal = document.createElement('div');
-    petal.innerText = '🌸'; // you can alternate '🌸' and '💐'
-    petal.style.position = 'absolute';
-    petal.style.fontSize = (15 + Math.random()*25) + 'px';
-    petal.style.left = Math.random()*100 + 'vw';
-    petal.style.top = Math.random()*-100 + 'vh';
-    petal.style.opacity = 0.7 + Math.random()*0.3;
-    petal.style.pointerEvents = 'none';
-    petal.style.transform = `rotate(${Math.random()*360}deg)`;
-    document.body.appendChild(petal);
+let clicked = false;
+function yesClicked() {
+    if(clicked) return;
+    clicked = true;
 
-    // Animate falling
-    const duration = 8 + Math.random()*5;
-    petal.animate([
-        { transform: `translateY(0) rotate(0deg)` },
-        { transform: `translateY(100vh) rotate(${360 + Math.random()*360}deg)` }
-    ], { duration: duration*1000, iterations: Infinity, easing: 'linear' });
+    document.getElementById("yes").disabled = true;
+    document.getElementById("no").disabled = true;
+
+    const magic = document.getElementById("magicText");
+
+    // Reset animation
+    magic.style.animation = "none";
+    magic.offsetHeight; // force reflow
+
+    // Animate over the paragraph
+    magic.style.opacity = "1";
+    magic.style.pointerEvents = "auto";
+    magic.style.animation = "magicGrowOverText 2.8s cubic-bezier(.22,1,.36,1) forwards";
+
+    // Show revisit button after animation
+    setTimeout(() => {
+        document.getElementById("revisitBtn").style.display = "block";
+    }, 2800);
+
+    // Add romantic floating hearts
+    addMagicHearts();
 }
 
-// Interactive flower pop on click
-document.body.addEventListener('click', e=>{
-    const flower = document.createElement('div');
-    flower.innerText = '🌸';
-    flower.className='sparkle';
-    flower.style.left = e.clientX + 'px';
-    flower.style.top = e.clientY + 'px';
-    flower.style.fontSize = '20px';
-    document.body.appendChild(flower);
-    setTimeout(()=>flower.remove(),1500);
-});
-/* Cute scattered collage with gaps */
-const collage = document.getElementById('photo-collage');
 
-const photos = [
+// NO click
+function noClicked(){
+    if(clicked) return;
+    const btn=document.getElementById('no');
+    btn.style.position='fixed';
+    btn.style.left=Math.random()*80+'vw';
+    btn.style.top=Math.random()*80+'vh';
+}
+function goNext() {
+    window.location.href = "index.html";
+}
+function addMagicHearts() {
+    const magicText = document.getElementById('magicText');
+    const icons = ['❤️','💖','💞','✨','🌸','💐'];
+
+    for (let i = 0; i < 8; i++) {
+        const heart = document.createElement('span');
+        heart.innerText = icons[Math.floor(Math.random() * icons.length)];
+
+        heart.style.position = 'absolute';
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.top = Math.random() * 100 + '%';
+        heart.style.fontSize = (18 + Math.random() * 18) + 'px';
+        heart.style.opacity = 0.7;
+        heart.style.pointerEvents = 'none';
+        heart.style.animation = 'floatUp 2.5s ease-in-out infinite';
+
+        magicText.appendChild(heart);
+    }
+}
+const images = [
     'assets/typher1.jpg',
     'assets/typher2.jpg',
     'assets/typher3.jpg',
@@ -341,34 +502,58 @@ const photos = [
     'assets/typher8.jpg'
 ];
 
-// Adjust density
-const cols = window.innerWidth < 480 ? 3 :
-             window.innerWidth < 768 ? 4 : 5;
+const layer = document.getElementById("memoryLayer");
 
-const rows = 6;
-const total = rows * cols;
+const placed = [];
+const CARD_W = 130;
+const CARD_H = 170;
+const GAP = 18;
 
-for (let i = 0; i < total; i++) {
-    const cell = document.createElement('div');
-    cell.className = 'photo-cell';
-
-    const tile = document.createElement('div');
-    tile.className = 'photo-tile';
-
-    tile.style.backgroundImage =
-        `url(${photos[i % photos.length]})`;
-
-    tile.style.setProperty('--rot', `${Math.random()*10 - 5}deg`);
-    tile.style.setProperty('--tx', `${Math.random()*12 - 6}px`);
-    tile.style.setProperty('--ty', `${Math.random()*12 - 6}px`);
-
-    tile.style.animationDuration =
-        (10 + Math.random()*6) + 's';
-
-    cell.appendChild(tile);
-    collage.appendChild(cell);
+/* Check overlap */
+function overlaps(x, y) {
+    return placed.some(p =>
+        x < p.x + CARD_W + GAP &&
+        x + CARD_W + GAP > p.x &&
+        y < p.y + CARD_H + GAP &&
+        y + CARD_H + GAP > p.y
+    );
 }
 
+/* How many cards needed to fill screen */
+const screenArea = window.innerWidth * window.innerHeight;
+const cardArea = (CARD_W + GAP) * (CARD_H + GAP);
+const totalCards = Math.floor(screenArea / cardArea);
+
+/* Create cards */
+for (let i = 0; i < totalCards; i++) {
+
+    let x, y, tries = 0;
+
+    do {
+        x = Math.random() * (window.innerWidth - CARD_W);
+        y = Math.random() * (window.innerHeight - CARD_H);
+        tries++;
+    } while (overlaps(x, y) && tries < 100);
+
+    placed.push({ x, y });
+
+    const card = document.createElement("div");
+    card.className = "memory";
+
+    card.style.left = x + "px";
+    card.style.top = y + "px";
+    card.style.setProperty("--rot", (Math.random() * 14 - 7) + "deg");
+
+    const img = document.createElement("img");
+    img.src = images[i % images.length];
+    img.alt = "Memory";
+
+    card.appendChild(img);
+    layer.appendChild(card);
+}
+function goNext() {
+    window.location.href = "index.html";
+}
 
 </script>
 
