@@ -311,7 +311,6 @@ canvas {
 /* Scene control */
 let current = 1;
 const total = 5;
-let scene3Timer = null;
 
 function nextScene() {
     if (current >= total) return;
@@ -319,33 +318,18 @@ function nextScene() {
     document.getElementById(`scene${current}`).classList.remove('active');
     current++;
     document.getElementById(`scene${current}`).classList.add('active');
-
-    // ✅ If Scene 3 → auto move after 5 seconds
-    if (current === 3) {
-        scene3Timer = setTimeout(() => {
-            nextScene(); // go to Scene 4 automatically
-        }, 5000); // ⏱️ 5 seconds
-    }
 }
 
-/* Tap progression */
-document.body.addEventListener('click', () => {
-    // ❌ Disable tap on Scene 3
-    if (current === 3) return;
-    nextScene();
-});
-
-/* Photo reveal */
 /* Scene 3 elements */
 const tapHint = document.getElementById("tapHint"); // "Tap me ❤️"
 const photo = document.getElementById("photo");
 
-// Show "Tap me" immediately
+// Show "Tap me" immediately in Scene 3
 tapHint.style.opacity = "1";
 
-/* Tap me click for Scene 3 */
+// Tap me click for Scene 3
 tapHint.addEventListener("click", (e) => {
-    e.stopPropagation(); // prevent body click
+    e.stopPropagation(); // prevent body click from triggering nextScene
 
     // Disable further clicks
     tapHint.style.pointerEvents = "none";
@@ -366,6 +350,11 @@ tapHint.addEventListener("click", (e) => {
     }, 6000);
 });
 
+/* Body click progression for all scenes except Scene 3 */
+document.body.addEventListener('click', () => {
+    if (current === 3) return; // do nothing on Scene 3
+    nextScene(); // all other scenes move on click
+});
 
 /* Music fade-in */
 function fadeInMusic() {
@@ -437,3 +426,4 @@ function finalYes() {
 
 </body>
 </html>
+
