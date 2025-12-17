@@ -269,7 +269,7 @@ canvas {
 </div>
 <!-- SCENE 3 -->
 <div class="scene" id="scene3">
-    <img src="assets/herpic1.jpg" id="photo" alt="Her Photo">
+    <img src="assets/background.jpg" id="photo" alt="Her Photo">
 
     <p class="tease-text" id="teaseText">
         Do you want to know who the world’s prettiest girl is? 😏💖
@@ -324,14 +324,20 @@ function nextScene() {
 const tapHint = document.getElementById("tapHint"); // "Tap me ❤️"
 const photo = document.getElementById("photo");
 
-// Show "Tap me" immediately in Scene 3
+// Show "Tap me" immediately
 tapHint.style.opacity = "1";
+
+// Flag to track if image has been revealed
+let imageRevealed = false;
 
 // Tap me click for Scene 3
 tapHint.addEventListener("click", (e) => {
     e.stopPropagation(); // prevent body click from triggering nextScene
 
-    // Disable further clicks
+    if (imageRevealed) return; // prevent multiple clicks
+    imageRevealed = true;
+
+    // Disable further clicks on Tap Me
     tapHint.style.pointerEvents = "none";
 
     // Smooth blur-to-clear transition
@@ -342,19 +348,22 @@ tapHint.addEventListener("click", (e) => {
     // Start music softly
     fadeInMusic();
 
-    // Keep image visible for 6 seconds, then move to Scene 4
-    setTimeout(() => {
-        document.getElementById(`scene${current}`).classList.remove('active');
-        current++;
-        document.getElementById(`scene${current}`).classList.add('active');
-    }, 6000);
+    // Now wait until user clicks anywhere to move to next scene
 });
 
-/* Body click progression for all scenes except Scene 3 */
+// Body click progression for all scenes
 document.body.addEventListener('click', () => {
-    if (current === 3) return; // do nothing on Scene 3
-    nextScene(); // all other scenes move on click
+    if (current === 3) {
+        if (imageRevealed) {
+            // Image revealed → proceed to next scene on click anywhere
+            nextScene();
+        }
+        // else do nothing until she clicks "Tap me"
+        return;
+    }
+    nextScene(); // All other scenes move on click
 });
+
 
 /* Music fade-in */
 function fadeInMusic() {
@@ -426,4 +435,3 @@ function finalYes() {
 
 </body>
 </html>
-
