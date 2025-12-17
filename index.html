@@ -3,265 +3,354 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy New Year</title>
+<title>For My Sanchitha ❤️</title>
+
 <style>
-body, html {
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
     font-family: 'Shadows Into Light', cursive;
-    overflow-x: hidden; /* allow vertical scroll if needed */
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    overflow: hidden;
 }
 
-#newyear {
+/* 🌸 Animated romantic background */
+body {
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #ff70a6);
+    background-size: 400% 400%;
+    animation: bgMove 12s ease infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 🌟 Scene wrapper */
+.scene {
+    position: absolute;
+    inset: 0;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
-    padding: 40px 20px;
+    justify-content: center;
     text-align: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.2s ease;
 }
 
-/* Headings */
-#newyear h1 {
-    font-size: 3rem;
+.scene.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* 💖 Title */
+h1 {
+    font-size: clamp(2.5rem, 7vw, 4rem);
     color: #fff;
-    text-shadow: 2px 2px 10px #ff70a6;
-    margin-bottom: 20px;
+    text-shadow:
+        0 0 10px #fff,
+        0 0 30px #ff70a6,
+        0 0 60px #ff0055;
+    margin-bottom: 15px;
 }
 
-#newyear p {
-    font-size: 1.8rem;
+/* ✨ Text */
+p {
+    font-size: clamp(1.4rem, 4vw, 2rem);
     color: #fff;
-    margin-bottom: 30px;
+    max-width: 800px;
+    line-height: 1.6;
+    text-shadow: 0 0 10px rgba(255,255,255,0.7);
 }
 
-/* Hero Image - fixed size */
-#newyear img.herpic {
-    width: 250px;
-    height: 250px;
+/* 📸 Photo */
+#photo {
+    width: 260px;
+    height: 260px;
     border-radius: 50%;
-    filter: blur(3px);
-    margin-bottom: 20px;
     object-fit: cover;
+    margin: 30px 0;
+    filter: blur(10px);
+    transition: filter 1.6s ease, transform 1.6s ease;
+    box-shadow: 0 0 30px rgba(255,255,255,0.8);
 }
-.herpic {
-    filter: blur(6px);
-    transition: all 1.5s ease;
-    cursor: pointer;
-}
-.herpic.reveal {
+
+#photo.unblur {
     filter: blur(0);
     transform: scale(1.05);
 }
 
+/* 🌟 Glow name */
+.glow-name {
+    font-size: clamp(3rem, 9vw, 5rem);
+    color: #fff;
+    animation: glowPulse 2.5s ease-in-out infinite;
+}
 
-/* Button */
+@keyframes glowPulse {
+    0% { text-shadow: 0 0 10px #fff; }
+    50% {
+        text-shadow:
+            0 0 20px #fff,
+            0 0 40px #ff70a6,
+            0 0 80px #ff0055;
+    }
+    100% { text-shadow: 0 0 10px #fff; }
+}
+
+/* ❤️ Button */
 button {
-    padding: 12px 30px;
-    font-size: 1.5rem;
-    border-radius: 10px;
+    margin-top: 30px;
+    padding: 14px 36px;
+    font-size: 1.6rem;
+    border-radius: 30px;
     border: none;
     cursor: pointer;
-    background: #ff70a6;
-    color: white;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-    transition: all 0.3s;
+    background: linear-gradient(135deg, #ff70a6, #ff0055);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255,255,255,0.8);
+    transition: transform 0.3s ease;
 }
 
 button:hover {
     transform: scale(1.1);
 }
 
-/* Teddy animation (if any) */
-#newyear img.teddy {
-    width: 100px;
-    height: 100px;
-    animation: bounce 1s infinite alternate;
-    margin-bottom: 20px;
-}
-
-@keyframes bounce {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-20px); }
-}
-
-/* Sparkles */
-#sparkles .sparkle {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: #fff;
-    border-radius: 50%;
-    animation: sparkle 2s infinite;
-}
-
-@keyframes sparkle {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(0.5) translate(20px, 20px); }
-}
-
-/* Background grid - soft blurred images */
-.bg-grid {
+/* 🎆 Fireworks canvas */
+canvas {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: -2;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 10px;
-    padding: 10px;
-    opacity: 0.45;
-}
-
-.bg-grid img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: blur(6px) brightness(0.9);
-    border-radius: 20px;
-    animation: slowMove 8s infinite alternate ease-in-out;
-}
-
-@keyframes slowMove {
-    0% { transform: scale(1) translateY(0); }
-    100% { transform: scale(1.08) translateY(-10px); }
-}
-.firework {
-    position: fixed;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: white;
+    inset: 0;
     pointer-events: none;
-    animation: explode 1.2s ease-out forwards;
+    z-index: 0;
 }
 
-@keyframes explode {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(var(--x), var(--y)) scale(1);
-        opacity: 0;
-    }
+/* ✨ Floating hearts */
+.heart {
+    position: fixed;
+    font-size: 1.6rem;
+    animation: floatUp 3s ease-out forwards;
 }
-.name-glow {
-    font-size: 2.4rem;
-    margin-bottom: 15px;
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-200px); opacity: 0; }
+}
+.mystery-text {
+    font-size: 1.7rem;
     color: #fff;
-    animation: glowName 2.5s infinite alternate;
+    line-height: 2.3rem;
+    margin-bottom: 30px;
+    text-shadow: 0 0 12px rgba(255, 170, 220, 0.9);
+    animation: fadePulse 3s ease-in-out infinite;
 }
 
-@keyframes glowName {
-    0% {
-        text-shadow: 0 0 10px #ff9a9e;
-    }
-    100% {
-        text-shadow:
-            0 0 20px #ff70a6,
-            0 0 40px #ff4d6d,
-            0 0 80px #ff9a9e;
-    }
+@keyframes fadePulse {
+    0% { opacity: 0.9; }
+    50% { opacity: 1; }
+    100% { opacity: 0.9; }
 }
 
+.next-btn {
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 1.6rem;
+    padding: 14px 40px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
 
-/* Scrollable page for small screens */
-html, body {
-    overflow-y: auto;
+    color: #fff;
+    background: linear-gradient(135deg, #ff70a6, #ff0055);
+
+    box-shadow:
+        0 0 15px rgba(255,255,255,0.6),
+        0 0 40px rgba(255,105,180,0.9);
+
+    transition: transform 0.3s ease;
 }
+
+.next-btn:hover {
+    transform: scale(1.12);
+}
+
 </style>
 </head>
+
 <body>
 
-<section id="newyear">
-    <h1 class="magic-name">🎉 Happy New Year 2026 🎉</h1>
-<p class="name-glow">Sanchitha 💖</p>
-    <img src="assets/background.jpg" alt="Her Pic" class="herpic">
-    <button onclick="nextSection()">Start ✨</button>
-    <div id="sparkles"></div>
-    <audio id="bg-music" src="assets/piano.mp3"></audio>
-</section>
+<canvas id="fireworks"></canvas>
+
+<div class="scene active" id="scene1">
+    <h1>Hey Sanchitha 💖</h1>
+    <p>
+        I made this just for you…<br>
+        something simple, something real,<br>
+        filled with a little magic ✨<br><br>
+        Tap anywhere and let me show you 🌸
+    </p>
+</div>
+
+<!-- SCENE 2 -->
+<div class="scene" id="scene2">
+    <p>
+        From the moment you entered my life,<br>
+        everything felt warmer and softer ✨
+    </p>
+
+    <p>
+        Your smile has this quiet magic,<br>
+        it makes even ordinary days feel special 🌸
+    </p>
+
+    <p>
+        You have the kind of presence<br>
+        that stays in my thoughts longer than it should 💭
+    </p>
+
+    <p>
+        And somehow, without trying,<br>
+        you made my world feel more like home 💖
+    </p>
+</div>
+
+
+<!-- SCENE 3 -->
+<div class="scene" id="scene3">
+    <img src="assets/background.jpg" id="photo" alt="Her Photo">
+    <p>Tap me ❤️</p>
+</div>
+
+<!-- SCENE 4 -->
+<div class="scene" id="scene4">
+    <h1 class="glow-name">Sanchitha ❤️</h1>
+    <p>
+        In a world full of moments,<br>
+        you became my favorite one.<br><br>
+        My heart feels at home<br>
+        whenever it thinks of you ✨
+    </p>
+</div>
+
+
+<!-- SCENE 5 -->
+<div class="scene" id="scene5">
+    <h1>Happy New Year 2026 🎆</h1>
+
+    <p class="mystery-text">
+        This is not the end… 💫<br>
+        Something made just for you<br>
+        is waiting on the next page 💖
+    </p>
+
+    <button class="next-btn" onclick="finalYes()">
+        For You 💕
+    </button>
+</div>
+
+<audio id="music" src="assets/piano.mp3" loop></audio>
 
 <script>
-/* Floating sparkles */
-const sparklesContainer = document.getElementById('sparkles');
-for (let i = 0; i < 30; i++) {
-    let s = document.createElement('div');
-    s.className = 'sparkle';
-    s.style.top = Math.random() * 100 + '%';
-    s.style.left = Math.random() * 100 + '%';
-    sparklesContainer.appendChild(s);
-}
-function launchFirework() {
-    const colors = ['#ff4d6d','#ffd166','#ff9a9e','#ffffff'];
-    const x = Math.random() * window.innerWidth;
-    const y = Math.random() * window.innerHeight * 0.5;
+/* Scene control */
+let current = 1;
+const total = 5;
 
-    for (let i = 0; i < 24; i++) {
-        const fw = document.createElement("div");
-        fw.className = "firework";
-        fw.style.left = x + "px";
-        fw.style.top = y + "px";
-        fw.style.background = colors[Math.floor(Math.random() * colors.length)];
-        fw.style.setProperty("--x", `${Math.random()*200-100}px`);
-        fw.style.setProperty("--y", `${Math.random()*200-100}px`);
-        document.body.appendChild(fw);
-        setTimeout(() => fw.remove(), 1200);
-    }
+function nextScene() {
+    if (current >= total) return;
+    document.getElementById(`scene${current}`).classList.remove('active');
+    current++;
+    document.getElementById(`scene${current}`).classList.add('active');
 }
-setInterval(launchFirework, 2200);
 
-const herPic = document.querySelector(".herpic");
-herPic.addEventListener("click", () => {
-    herPic.classList.add("reveal");
+/* Tap progression */
+document.body.addEventListener('click', () => {
+    if (current === 3) return;
+    nextScene();
 });
+
+/* Photo reveal */
+const photo = document.getElementById('photo');
+photo.onclick = (e) => {
+    e.stopPropagation();
+    photo.classList.add('unblur');
+    fadeInMusic();
+    setTimeout(nextScene, 1600);
+};
+
+/* Music fade-in */
 function fadeInMusic() {
-    const music = document.getElementById("bg-music");
+    const music = document.getElementById('music');
     music.volume = 0;
     music.play();
-
-    let vol = 0;
+    let v = 0;
     const fade = setInterval(() => {
-        vol += 0.05;
-        music.volume = Math.min(vol, 0.6);
-        if (vol >= 0.6) clearInterval(fade);
-    }, 200);
+        v += 0.02;
+        music.volume = Math.min(v, 0.5);
+        if (v >= 0.5) clearInterval(fade);
+    }, 120);
 }
 
-function nextSection() {
-    fadeInMusic();
+/* Final */
+function finalYes() {
+    launchFireworks();
+    spawnHearts();
+}
+
+/* 🎆 Fireworks */
+const canvas = document.getElementById('fireworks');
+const ctx = canvas.getContext('2d');
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+function launchFireworks() {
+    setInterval(() => {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height / 2;
+        for (let i = 0; i < 40; i++) {
+            ctx.fillStyle = `hsl(${Math.random()*360},100%,70%)`;
+            ctx.beginPath();
+            ctx.arc(x + Math.random()*80-40, y + Math.random()*80-40, 3, 0, Math.PI*2);
+            ctx.fill();
+        }
+    }, 500);
+}
+
+/* 💖 Hearts */
+function spawnHearts() {
+    setInterval(() => {
+        const h = document.createElement('div');
+        h.className = 'heart';
+        h.innerText = '💖';
+        h.style.left = Math.random()*100+'vw';
+        h.style.top = '90vh';
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),3000);
+    }, 300);
+}
+function finalYes() {
+    launchFireworks();
+    spawnHearts();
+
+    // Soft delay before moving to next page
     setTimeout(() => {
         window.location.href = "hearts.html";
-    }, 1200);
-}
-setInterval(() => {
-    const h = document.createElement("div");
-    h.innerText = "💖";
-    h.style.position = "fixed";
-    h.style.left = Math.random() * 100 + "vw";
-    h.style.bottom = "-20px";
-    h.style.fontSize = "1.5rem";
-    h.style.animation = "floatUp 4s linear forwards";
-    document.body.appendChild(h);
-    setTimeout(() => h.remove(), 4000);
-}, 600);
-
-
-/* Start button: play music & next section */
-function nextSection() {
-    document.getElementById('bg-music').play();
-    window.location.href = 'hearts.html';
+    }, 4500); // 4.5 seconds (perfect emotional timing)
 }
 </script>
 
 </body>
 </html>
+
 
