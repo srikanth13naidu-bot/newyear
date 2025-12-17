@@ -292,19 +292,24 @@ document.body.addEventListener('click', () => {
 
 /* Photo reveal */
 const photo = document.getElementById('photo');
+
 photo.onclick = (e) => {
     e.stopPropagation();
 
+    // Reveal image
     photo.classList.add('unblur');
+
+    // Start music softly
     fadeInMusic();
 
-    // ⏱️ Stay here longer, then go to scene 4
+    // ⏳ Keep image visible for 6 seconds
     setTimeout(() => {
         document.getElementById(`scene${current}`).classList.remove('active');
-        current = 4;
-        document.getElementById('scene4').classList.add('active');
-    }, 9000);
+        current++;
+        document.getElementById(`scene${current}`).classList.add('active');
+    }, 6000); // 👈 6 seconds image stay
 };
+
 
 /* Music fade-in */
 function fadeInMusic() {
