@@ -269,7 +269,7 @@ canvas {
 </div>
 <!-- SCENE 3 -->
 <div class="scene" id="scene3">
-    <img src="assets/background.jpg" id="photo" alt="Her Photo">
+    <img src="assets/herpic1.jpg" id="photo" alt="Her Photo">
 
     <p class="tease-text" id="teaseText">
         Do you want to know who the world’s prettiest girl is? 😏💖
@@ -336,24 +336,36 @@ document.body.addEventListener('click', () => {
 });
 
 /* Photo reveal */
-const photo = document.getElementById('photo');
+/* Scene 3 elements */
+const tapHint = document.getElementById("tapHint"); // "Tap me ❤️"
+const photo = document.getElementById("photo");
 
-photo.onclick = (e) => {
-    e.stopPropagation();
+// Show "Tap me" immediately
+tapHint.style.opacity = "1";
 
-    // Reveal image
-    photo.classList.add('unblur');
+/* Tap me click for Scene 3 */
+tapHint.addEventListener("click", (e) => {
+    e.stopPropagation(); // prevent body click
+
+    // Disable further clicks
+    tapHint.style.pointerEvents = "none";
+
+    // Smooth blur-to-clear transition
+    photo.style.transition = "filter 1s ease, opacity 1s ease";
+    photo.style.filter = "blur(0px)";
+    photo.style.opacity = "1";
 
     // Start music softly
     fadeInMusic();
 
-    // ⏳ Keep image visible for 6 seconds
+    // Keep image visible for 6 seconds, then move to Scene 4
     setTimeout(() => {
         document.getElementById(`scene${current}`).classList.remove('active');
         current++;
         document.getElementById(`scene${current}`).classList.add('active');
-    }, 6000); // 👈 6 seconds image stay
-};
+    }, 6000);
+});
+
 
 /* Music fade-in */
 function fadeInMusic() {
@@ -425,4 +437,3 @@ function finalYes() {
 
 </body>
 </html>
-
