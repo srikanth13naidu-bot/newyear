@@ -185,6 +185,48 @@ canvas {
 .next-btn:hover {
     transform: scale(1.12);
 }
+/* Scene 3 */
+#scene3 {
+    text-align: center;
+}
+
+/* Teasing text visible first */
+.tease-text {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-top: 12px;
+    opacity: 1; /* visible immediately */
+}
+
+/* Tap me hidden initially */
+.tap-hint {
+    font-size: 1.6rem;
+    color: #ffd6e8;
+    margin-top: 14px;
+    cursor: pointer;
+    opacity: 0; /* hidden first */
+    animation: pulse 1.4s infinite;
+}
+
+/* Image blur initially */
+#photo {
+    width: 260px;
+    border-radius: 20px;
+    filter: blur(6px);
+    transition: filter 1.8s ease;
+}
+
+/* Reveal image */
+#photo.unblur {
+    filter: blur(0);
+}
+
+/* Tap me animation */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+}
 
 </style>
 </head>
@@ -225,12 +267,15 @@ canvas {
         you made my world feel more like home 💖
     </p>
 </div>
-
-
 <!-- SCENE 3 -->
 <div class="scene" id="scene3">
-    <img src="assets/herpic1.jpg" id="photo" alt="Her Photo">
-    <p>Tap me ❤️</p>
+    <img src="assets/background.jpg" id="photo" alt="Her Photo">
+
+    <p class="tease-text" id="teaseText">
+        Do you want to know who the world’s prettiest girl is? 😏💖
+    </p>
+
+    <p class="tap-hint" id="tapHint">Tap me ❤️</p>
 </div>
 
 <!-- SCENE 4 -->
@@ -310,7 +355,6 @@ photo.onclick = (e) => {
     }, 6000); // 👈 6 seconds image stay
 };
 
-
 /* Music fade-in */
 function fadeInMusic() {
     const music = document.getElementById('music');
@@ -375,8 +419,10 @@ function finalYes() {
         window.location.href = "hearts.html";
     }, 4500);
 }
+
 </script>
 
 
 </body>
 </html>
+
