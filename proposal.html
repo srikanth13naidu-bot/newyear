@@ -115,122 +115,97 @@ button#no:hover { animation:jump 0.5s infinite alternate;}
     100%{transform:translateY(0);}
 }
 
-/* 💖 Romantic Final Message – Unique Design */
+/* 🌸 Soft romantic overlay box */
 #magicText {
-      position: absolute;
-    inset: 0;                 /* full screen overlay */
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+
     display: flex;
     align-items: center;
     justify-content: center;
-     z-index: 30;
- transform-origin: center center;
-    opacity: 0;
-    pointer-events: none;
+
+    padding: 20px;
 
     opacity: 0;
     pointer-events: none;
-    z-index: 30;
-
-    transform: scale(0.3);
-
-    width: 100%;
-    max-width: 900px;
-    padding: clamp(25px, 5vw, 50px);
-    border-radius: 35px;
-     box-sizing: border-box; 
-
-    font-size: clamp(1.6rem, 4.8vw, 2.8rem);
-    line-height: 1.5;
-    text-align: center;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-
-    color: #fff;
-
-    background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.25),
-        rgba(255, 170, 200, 0.15)
-    );
-
-    backdrop-filter: blur(18px);
-    border: 1px solid rgba(255,255,255,0.3);
-
-    box-shadow:
-        0 0 30px rgba(255, 120, 170, 0.8),
-        0 0 80px rgba(255, 60, 150, 0.9),
-        0 0 140px rgba(255, 120, 200, 1);
-
-    text-shadow:
-        0 0 10px #fff,
-        0 0 25px #ff9acb,
-        0 0 45px #ff3c97;
-
-
-    animation:
-        heartPulse 3.5s ease-in-out infinite,
-        glowShift 6s ease-in-out infinite;
 }
+
 #magicText > div {
-    width: min(90%, 880px);
-    padding: clamp(24px, 5vw, 38px);
-
-    border-radius: 32px;
-    text-align: center;
-
-    font-size: clamp(1.5rem, 4.6vw, 2.5rem);
-    line-height: 1.55;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 190, 210, 0.92),
+        rgba(255, 160, 190, 0.92)
+    );
 
     color: #fff;
 
-    background: linear-gradient(
-        135deg,
-        rgba(255,255,255,0.28),
-        rgba(255,170,200,0.18)
-    );
+    padding: clamp(28px, 6vw, 48px);
+    border-radius: 28px;
 
-    backdrop-filter: blur(18px);
-    border: 1px solid rgba(255,255,255,0.3);
+    max-width: 720px;
+    width: 100%;
+
+    font-size: clamp(1.5rem, 4.6vw, 2.4rem);
+    line-height: 1.55;
+    text-align: center;
+    font-weight: 500;
 
     box-shadow:
-        0 0 28px rgba(255,120,170,0.9),
-        0 0 80px rgba(255,60,150,1);
+        0 12px 40px rgba(255, 80, 130, 0.35);
 
     text-shadow:
-        0 0 10px #fff,
-        0 0 22px #ff9acb,
-        0 0 38px #ff3c97;
+        0 0 6px rgba(255,255,255,0.35);
+
+    border: 1px solid rgba(255,255,255,0.25);
+
+    /* 🌸 Animation start state */
+    opacity: 0;
+    transform: scale(0.82);
+
+    /* 💖 Smooth zoom-in */
+    animation: romanticZoom 1.9s ease-out forwards;
 }
-@keyframes magicGrowFromTitle {
+@keyframes romanticZoom {
     0% {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(0.2);
+        transform: scale(0.82);
     }
-    60% {
+    70% {
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1.08);
+        transform: scale(1.03);
     }
     100% {
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
-}
-@keyframes magicGrowOverText {
-    0% {
-        transform: scale(0.2);
-        opacity: 0;
-    }
-    60% {
-        transform: scale(1.08);
-        opacity: 1;
-    }
-    100% {
         transform: scale(1);
-        opacity: 1;
     }
 }
+
+/* 💞 Gentle reveal */
+@keyframes gentlePop {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Gentle romantic entrance */
+@keyframes softLoveReveal {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 /* 💓 Breathing Heart Effect */
 @keyframes heartPulse {
     0%   { transform: translate(-50%, -50%) scale(1); }
