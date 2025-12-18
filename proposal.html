@@ -115,7 +115,7 @@ button#no:hover { animation:jump 0.5s infinite alternate;}
     100%{transform:translateY(0);}
 }
 
-/* 🌸 Soft romantic overlay box */
+/* 🌸 Fullscreen overlay */
 #magicText {
     position: fixed;
     inset: 0;
@@ -125,84 +125,139 @@ button#no:hover { animation:jump 0.5s infinite alternate;}
     align-items: center;
     justify-content: center;
 
-    padding: 20px;
+    padding: 16px;
 
     opacity: 0;
     pointer-events: none;
+    transition: opacity 0.6s ease;
+}
+
+#magicText.show {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 #magicText > div {
+    width: min(92vw, 820px);
+    min-height: 220px;
+    max-height: 70vh;
+
+    padding: 26px 36px;
+
     background: linear-gradient(
         135deg,
-        rgba(255, 190, 210, 0.92),
-        rgba(255, 160, 190, 0.92)
+        rgba(255, 195, 215, 0.97),
+        rgba(255, 150, 190, 0.97)
     );
 
+    border-radius: 32px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
     color: #fff;
 
-    padding: clamp(28px, 6vw, 48px);
-    border-radius: 28px;
-
-    max-width: 720px;
-    width: 100%;
-
-    font-size: clamp(1.5rem, 4.6vw, 2.4rem);
-    line-height: 1.55;
-    text-align: center;
+    font-size: clamp(1.15rem, 3.2vw, 1.95rem);
+    line-height: 1.45;
     font-weight: 500;
 
+    position: relative;
+    overflow: hidden;
+
+    /* 🌸 ROMANTIC BORDER MAGIC */
     box-shadow:
-        0 12px 40px rgba(255, 80, 130, 0.35);
+        0 0 0 3px rgba(255,255,255,0.45),      /* soft white frame */
+        0 0 0 8px rgba(255,170,200,0.25),      /* blush glow */
+        0 30px 75px rgba(255, 90, 140, 0.45);  /* depth */
 
-    text-shadow:
-        0 0 6px rgba(255,255,255,0.35);
+    text-shadow: 0 0 8px rgba(255,255,255,0.35);
 
-    border: 1px solid rgba(255,255,255,0.25);
-
-    /* 🌸 Animation start state */
+    /* Animation start */
     opacity: 0;
-    transform: scale(0.82);
-
-    /* 💖 Smooth zoom-in */
-    animation: romanticZoom 1.9s ease-out forwards;
+    transform: scale(0.6) translateY(35px);
 }
+#magicText > div::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+
+    border-radius: 26px;
+
+    border: 1.5px solid rgba(255,255,255,0.35);
+
+    pointer-events: none;
+
+    box-shadow:
+        inset 0 0 18px rgba(255,255,255,0.25);
+}
+@keyframes borderPulse {
+    0%, 100% {
+        box-shadow:
+            0 0 0 3px rgba(255,255,255,0.45),
+            0 0 0 8px rgba(255,170,200,0.25),
+            0 30px 75px rgba(255, 90, 140, 0.45);
+    }
+    50% {
+        box-shadow:
+            0 0 0 3px rgba(255,255,255,0.6),
+            0 0 0 10px rgba(255,190,220,0.4),
+            0 35px 90px rgba(255, 90, 140, 0.6);
+    }
+}
+
+#magicText.show > div {
+    animation:
+        romanticZoom 1.9s cubic-bezier(.22,1,.36,1) forwards,
+        borderPulse 4.5s ease-in-out infinite 2s,
+        softFloat 6s ease-in-out infinite 2s;
+}
+
+
+/* 📸 Polaroid bottom strip */
+#magicText > div::after {
+    content: "";
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 78%;
+    height: 26px;
+
+    background: rgba(255,255,255,0.95);
+    border-radius: 0 0 18px 18px;
+
+    box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+}
+
+/* 💖 Entrance + romantic float */
+#magicText.show > div {
+    animation:
+        romanticZoom 1.9s cubic-bezier(.22,1,.36,1) forwards,
+        softFloat 6s ease-in-out infinite 2s;
+}
+
 @keyframes romanticZoom {
     0% {
         opacity: 0;
-        transform: scale(0.82);
+        transform: scale(0.6) translateY(35px);
     }
-    70% {
+    60% {
         opacity: 1;
-        transform: scale(1.03);
+        transform: scale(1.06) translateY(-6px);
     }
     100% {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1) translateY(0);
     }
 }
 
-/* 💞 Gentle reveal */
-@keyframes gentlePop {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Gentle romantic entrance */
-@keyframes softLoveReveal {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+@keyframes softFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
 }
 
 
@@ -374,11 +429,18 @@ button {
 
 <div id="magicText">
   <div>
-    Our story just opened its most beautiful chapter ❤️<br>
-    Two hearts choosing each other, every single day,<br>
-    hand in hand — forever begins with us ♾️✨<br>
-    I LOVE YOU FOREVER 💕🤍
-  </div>
+    This is where our story truly begins 💕<br>
+
+    <strong style="font-size:1.1em;">S + S = ❤️</strong>
+    Not just letters, but two hearts<br>
+    choosing the same path ✨<br>
+
+    From today, it’s about us — growing together,<br>
+    laughing together, and building something beautiful,<br>
+    one moment at a time 🌸<br>
+
+    This isn’t the end of anything…<br>
+    it’s the start of our new journey together ♾️🤍
 </div>
 
 
@@ -418,12 +480,16 @@ function yesClicked() {
 
     document.getElementById("yes").disabled = true;
     document.getElementById("no").disabled = true;
+    document.getElementById("magicText").classList.add("show");
 
     const magic = document.getElementById("magicText");
 
     // Reset animation
     magic.style.animation = "none";
     magic.offsetHeight; // force reflow
+    magic.classList.add("show");
+    magic.style.opacity = "1";
+    magic.style.pointerEvents = "auto";
 
     // Animate over the paragraph
     magic.style.opacity = "1";
@@ -533,6 +599,7 @@ for (let i = 0; i < totalCards; i++) {
 function goNext() {
     window.location.href = "index.html";
 }
+
 
 </script>
 
