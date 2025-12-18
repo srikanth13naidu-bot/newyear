@@ -227,6 +227,90 @@ canvas {
     50% { transform: scale(1.1); opacity: 1; }
     100% { transform: scale(1); opacity: 0.8; }
 }
+/* Intro box */
+.intro-box {
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(14px);
+    border-radius: 30px;
+    padding: 38px 34px;
+    max-width: 90%;
+    width: 520px;
+    box-shadow:
+        0 0 30px rgba(255,255,255,0.35),
+        0 0 80px rgba(255,105,180,0.45);
+    text-align: center;
+    margin-bottom: 30px;
+}
+.intro-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.8rem;
+    color: #fff;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+
+    text-shadow:
+        0 0 12px rgba(255,255,255,0.9),
+        0 0 30px #ff70a6,
+        0 0 60px #ff0055;
+}
+.intro-title {
+    animation: nameGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes nameGlow {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Paragraph */
+.intro-line {
+    font-size: 1.35rem;
+    line-height: 1.9rem;
+    color: #fff;
+    margin: 0;
+}
+
+/* Highlight name */
+.name-glow {
+    color: #fff;
+    font-weight: bold;
+    text-shadow:
+        0 0 10px #fff,
+        0 0 25px #ff70a6,
+        0 0 50px #ff0055;
+}
+
+/* Begin button */
+.begin-btn {
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 1.5rem;
+    padding: 14px 42px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+
+    background: linear-gradient(135deg, #ff70a6, #ff0055);
+    color: #fff;
+
+    box-shadow:
+        0 0 15px rgba(255,255,255,0.6),
+        0 0 40px rgba(255,105,180,0.9);
+
+    animation: pulse 1.6s infinite;
+    transition: transform 0.3s ease;
+}
+
+.begin-btn:hover {
+    transform: scale(1.12);
+}
+
+/* Pulse animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.07); }
+    100% { transform: scale(1); }
+}
 
 </style>
 </head>
@@ -234,16 +318,25 @@ canvas {
 <body>
 
 <canvas id="fireworks"></canvas>
-
 <div class="scene active" id="scene1">
-    <h1>Hey Sanchitha 💖</h1>
-    <p>
-        I made this just for you…<br>
-        something simple, something real,<br>
-        filled with a little magic ✨<br><br>
-        Tap anywhere and let me show you 🌸
-    </p>
+
+    <div class="intro-box">
+        <h1 class="intro-title" >Hey Sanchitha ❤️</h1>
+
+        <p class="intro-line">
+            I’m <span class="name-glow">Srikanth</span>, and this is something I made only for you ✨
+            A gentle little journey filled with soft moments, quiet feelings,
+            and a touch of magic waiting ahead 🌸
+            Nothing rushed, nothing loud — just something meant for you 💖
+        </p>
+    </div>
+
+    <button class="begin-btn">
+        Are you ready to begin? 💫
+    </button>
+
 </div>
+
 <!-- SCENE 2 -->
 <div class="scene" id="scene2">
     <h1>The Way You Are ✨</h1>
@@ -403,5 +496,6 @@ function finalYes() {
 
 </body>
 </html>
+
 
 
