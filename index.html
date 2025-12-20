@@ -264,6 +264,28 @@ button:hover { transform: scale(1.1); }
     50% { transform: translateY(-8px); }
     100% { transform: translateY(0); }
 }
+/* Scene 4 final soft button */
+#scene4 button {
+    margin-top: 22px;
+    padding: 10px 22px;
+
+    font-size: 1.05rem;      /* smaller */
+    font-weight: 500;
+    white-space: nowrap;     /* single line */
+
+    border-radius: 30px;
+    background: linear-gradient(135deg, #ff85b3, #ff4f8b);
+    color: #fff;
+
+    box-shadow: 0 6px 18px rgba(255,105,180,0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Soft romantic hover */
+#scene4 button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255,105,180,0.6);
+}
 
 /* ---------------- SCENE 5 HEARTS ---------------- */
 .heart {
@@ -502,6 +524,7 @@ function goFinal() {
 
 </body>
 </html>
+
 
 
 
