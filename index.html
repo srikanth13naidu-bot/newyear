@@ -6,29 +6,26 @@
 <title>For My Sanchitha ❤️</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Great+Vibes&display=swap');
 
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html, body {
     margin: 0;
-    padding: 0;
     width: 100%;
     height: 100%;
     font-family: 'Shadows Into Light', cursive;
     overflow: hidden;
 }
 
-/* 🌸 Animated romantic background */
+/* Background */
 body {
     background: linear-gradient(135deg, #ff9a9e, #fad0c4, #ff70a6);
     background-size: 400% 400%;
     animation: bgMove 12s ease infinite;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 @keyframes bgMove {
@@ -37,7 +34,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* 🌟 Scene wrapper */
+/* Scene */
 .scene {
     position: absolute;
     inset: 0;
@@ -45,8 +42,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: 20px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 1.2s ease;
@@ -57,88 +52,220 @@ body {
     pointer-events: auto;
 }
 
-/* 💖 Title */
+/* Headings */
 h1 {
-    font-size: clamp(2.5rem, 7vw, 4rem);
+    font-size: clamp(2.8rem, 4vw, 4.2rem);
     color: #fff;
-    text-shadow:
-        0 0 10px #fff,
-        0 0 30px #ff70a6,
-        0 0 60px #ff0055;
-    margin-bottom: 15px;
+    text-shadow: 0 0 20px #ff70a6;
 }
 
-/* ✨ Text */
-p {
-    font-size: clamp(1.4rem, 4vw, 2rem);
-    color: #fff;
-    max-width: 800px;
-    line-height: 1.6;
-    text-shadow: 0 0 10px rgba(255,255,255,0.7);
-}
-
-/* 📸 Photo */
-#photo {
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 30px 0;
-    filter: blur(10px);
-    transition: filter 1.6s ease, transform 1.6s ease;
-    box-shadow: 0 0 30px rgba(255,255,255,0.8);
-}
-
-#photo.unblur {
-    filter: blur(0);
-    transform: scale(1.05);
-}
-
-/* 🌟 Glow name */
-.glow-name {
-    font-size: clamp(3rem, 9vw, 5rem);
-    color: #fff;
-    animation: glowPulse 2.5s ease-in-out infinite;
-}
-
-@keyframes glowPulse {
-    0% { text-shadow: 0 0 10px #fff; }
-    50% {
-        text-shadow:
-            0 0 20px #fff,
-            0 0 40px #ff70a6,
-            0 0 80px #ff0055;
-    }
-    100% { text-shadow: 0 0 10px #fff; }
-}
-
-/* ❤️ Button */
+/* Buttons */
 button {
-    margin-top: 30px;
-    padding: 14px 36px;
+    margin-top: 25px;
+    padding: 14px 40px;
     font-size: 1.6rem;
-    border-radius: 30px;
+    border-radius: 40px;
     border: none;
     cursor: pointer;
     background: linear-gradient(135deg, #ff70a6, #ff0055);
     color: #fff;
-    box-shadow: 0 0 20px rgba(255,255,255,0.8);
+    box-shadow: 0 0 25px rgba(255,255,255,0.8);
     transition: transform 0.3s ease;
 }
+button:hover { transform: scale(1.1); }
 
-button:hover {
-    transform: scale(1.1);
+/* ---------------- SCENE 1 ---------------- */
+.intro-box {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(15px);
+    border-radius: 35px;
+    padding: 40px;
+    max-width: 520px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255,105,180,0.6);
 }
 
-/* 🎆 Fireworks canvas */
-canvas {
-    position: fixed;
+.intro-line {
+    font-size: 1.5rem;
+    color: #fff;
+    line-height: 2rem;
+}
+
+/* ---------------- SCENE 2 CHAT ---------------- */
+.chatbox {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(14px);
+    border-radius: 30px;
+    padding: 30px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(255,105,180,0.6);
+    transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.chat-buttons button {
+    margin: 10px;
+}
+
+.chatbox.slide-out {
+    transform: translateX(-120%);
+    opacity: 0;
+}
+
+/* ---------------- SCENE 3 (UNCHANGED LOOK) ---------------- */
+#scene3 {
+    gap: 25px;
+}
+
+#photo {
+    width: 280px;
+    height: 280px;
+    border-radius: 25px;
+    object-fit: cover;
+
+    filter: blur(12px) brightness(0.85);
+    transform: scale(0.92);
+    transition:
+        filter 2.8s ease,
+        transform 2.8s ease;
+
+    box-shadow:
+        0 0 40px rgba(255,255,255,0.5),
+        0 0 90px rgba(255,105,180,0.8);
+}
+
+/* After tap */
+#photo.unblur {
+    filter: blur(0) brightness(1);
+    transform: scale(1);
+}
+.tease-text {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-top: 20px;
+    text-align: center;
+    text-shadow:
+        0 0 12px rgba(255, 170, 220, 0.9),
+        0 0 30px rgba(255, 105, 180, 0.8);
+
+    animation: fadePulse 3s ease-in-out infinite;
+}
+
+@keyframes fadePulse {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
+}
+.tap-hint {
+    font-size: 1.6rem;
+    color: #ffd6e8;
+    margin-top: 14px;
+    cursor: pointer;
+
+    opacity: 0; /* hidden initially */
+    animation: pulse 1.4s infinite;
+    transition: opacity 1.2s ease;
+}
+
+/* ---------------- SCENE 4 INVITATION ---------------- */
+.invite {
+    background: linear-gradient(135deg, #fffafc, #ffe6ef);
+    width: 340px;
+    border-radius: 24px;
+    padding: 36px 28px;
+    text-align: center;
+    position: relative;
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.2),
+        0 0 80px rgba(255,105,180,0.6);
+
+    overflow: hidden;
+    transform: scale(0.95);
+    animation: inviteEnter 1.8s ease forwards;
+}
+
+@keyframes inviteEnter {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Ribbon */
+.ribbon {
+    position: absolute;
     inset: 0;
-    pointer-events: none;
-    z-index: 0;
+    background: linear-gradient(135deg, #ff0055, #ff85b3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 2.1rem;
+    color: #fff;
+    letter-spacing: 2px;
+
+    transition: transform 2.2s ease;
+    z-index: 2;
 }
 
-/* ✨ Floating hearts */
+.ribbon.open {
+    transform: translateY(-110%);
+}
+
+/* Inner text hidden initially */
+.invite h2,
+.invite p,
+.invite button {
+    opacity: 0;
+    transition: opacity 1.6s ease;
+}
+
+.invite.show-content h2,
+.invite.show-content p,
+.invite.show-content button {
+    opacity: 1;
+}
+.invite-heading {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.1rem;
+    margin-bottom: 10px;
+
+    color: #ff4f8b;
+    text-shadow:
+        0 0 12px rgba(255,105,180,0.6),
+        0 0 30px rgba(255,105,180,0.8);
+
+    opacity: 0;
+    transform: translateY(-15px);
+    transition: opacity 1.6s ease, transform 1.6s ease;
+}
+/* Scene 4 top romantic heading */
+.scene4-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.6rem, 4vw, 3.2rem);
+    margin-bottom: 25px;
+    text-align: center;
+
+    color: #fff;
+    text-shadow:
+        0 0 15px rgba(255,105,180,0.8),
+        0 0 40px rgba(255,70,140,0.9);
+
+    animation: softFloat 3.5s ease-in-out infinite;
+}
+
+/* Soft cinematic floating */
+@keyframes softFloat {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
+
+/* ---------------- SCENE 5 HEARTS ---------------- */
 .heart {
     position: fixed;
     font-size: 1.6rem;
@@ -146,170 +273,56 @@ canvas {
 }
 
 @keyframes floatUp {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-200px); opacity: 0; }
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-200px); opacity: 0; }
 }
-.mystery-text {
-    font-size: 1.7rem;
+/* Cinematic soft vignette */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(
+        circle,
+        rgba(255,255,255,0) 55%,
+        rgba(0,0,0,0.25) 100%
+    );
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Smooth cinematic fade */
+.scene {
+    transition: opacity 1.6s ease;
+}
+.ny-title {
+    font-size: clamp(2.0rem, 3vw, 2.8rem);
+    white-space: nowrap;   /* single line */
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
+
     color: #fff;
-    line-height: 2.3rem;
-    margin-bottom: 30px;
-    text-shadow: 0 0 12px rgba(255, 170, 220, 0.9);
-    animation: fadePulse 3s ease-in-out infinite;
-}
-
-@keyframes fadePulse {
-    0% { opacity: 0.9; }
-    50% { opacity: 1; }
-    100% { opacity: 0.9; }
-}
-
-.next-btn {
-    font-family: 'Shadows Into Light', cursive;
-    font-size: 1.6rem;
-    padding: 14px 40px;
-    border-radius: 30px;
-    border: none;
-    cursor: pointer;
-
-    color: #fff;
-    background: linear-gradient(135deg, #ff70a6, #ff0055);
-
-    box-shadow:
-        0 0 15px rgba(255,255,255,0.6),
-        0 0 40px rgba(255,105,180,0.9);
-
-    transition: transform 0.3s ease;
-}
-
-.next-btn:hover {
-    transform: scale(1.12);
-}
-/* Scene 3 */
-#scene3 {
-    text-align: center;
-}
-
-/* Teasing text visible first */
-.tease-text {
-    font-size: 1.8rem;
-    color: #fff;
-    margin-top: 12px;
-    opacity: 1; /* visible immediately */
-}
-
-/* Tap me hidden initially */
-.tap-hint {
-    font-size: 1.6rem;
-    color: #ffd6e8;
-    margin-top: 14px;
-    cursor: pointer;
-    opacity: 0; /* hidden first */
-    animation: pulse 1.4s infinite;
-}
-
-/* Image blur initially */
-#photo {
-    width: 260px;
-    border-radius: 20px;
-    filter: blur(6px);
-    transition: filter 1.8s ease;
-}
-
-/* Reveal image */
-#photo.unblur {
-    filter: blur(0);
-}
-
-/* Tap me animation */
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.1); opacity: 1; }
-    100% { transform: scale(1); opacity: 0.8; }
-}
-/* Intro box */
-.intro-box {
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(14px);
-    border-radius: 30px;
-    padding: 38px 34px;
-    max-width: 90%;
-    width: 520px;
-    box-shadow:
-        0 0 30px rgba(255,255,255,0.35),
-        0 0 80px rgba(255,105,180,0.45);
-    text-align: center;
-    margin-bottom: 30px;
-}
-.intro-title {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2.8rem;
-    color: #fff;
-    margin-bottom: 18px;
-    letter-spacing: 1px;
-
     text-shadow:
-        0 0 12px rgba(255,255,255,0.9),
+        0 0 12px #fff,
         0 0 30px #ff70a6,
         0 0 60px #ff0055;
 }
-.intro-title {
-    animation: nameGlow 2.5s ease-in-out infinite;
+.bg-heart {
+    position: fixed;
+    font-size: 1.8rem;
+    animation: bgFloat 3s ease-out forwards;
+    pointer-events: none;
+    z-index: 1;
 }
 
-@keyframes nameGlow {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-/* Paragraph */
-.intro-line {
-    font-size: 1.35rem;
-    line-height: 1.9rem;
-    color: #fff;
-    margin: 0;
-}
-
-/* Highlight name */
-.name-glow {
-    color: #fff;
-    font-weight: bold;
-    text-shadow:
-        0 0 10px #fff,
-        0 0 25px #ff70a6,
-        0 0 50px #ff0055;
-}
-
-/* Begin button */
-.begin-btn {
-    font-family: 'Shadows Into Light', cursive;
-    font-size: 1.5rem;
-    padding: 14px 42px;
-    border-radius: 40px;
-    border: none;
-    cursor: pointer;
-
-    background: linear-gradient(135deg, #ff70a6, #ff0055);
-    color: #fff;
-
-    box-shadow:
-        0 0 15px rgba(255,255,255,0.6),
-        0 0 40px rgba(255,105,180,0.9);
-
-    animation: pulse 1.6s infinite;
-    transition: transform 0.3s ease;
-}
-
-.begin-btn:hover {
-    transform: scale(1.12);
-}
-
-/* Pulse animation */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.07); }
-    100% { transform: scale(1); }
+@keyframes bgFloat {
+    0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-260px) scale(1.4);
+        opacity: 0;
+    }
 }
 
 </style>
@@ -317,148 +330,130 @@ canvas {
 
 <body>
 
-<canvas id="fireworks"></canvas>
+<!-- SCENE 1 -->
 <div class="scene active" id="scene1">
-
     <div class="intro-box">
-        <h1 class="intro-title" >Hey Sanchitha ❤️</h1>
-
+        <h1 class="ny-title">Happy New Year 2026 ❤️</h1>
         <p class="intro-line">
-            I’m <span class="name-glow">Srikanth</span>, and this is something I made only for you ✨
-            A gentle little journey filled with soft moments, quiet feelings,
-            and a touch of magic waiting ahead 🌸
-            Nothing rushed, nothing loud — just something meant for you 💖
+            A new year, new memories…<br>
+            and a beautiful reason to smile — **you** 💫<br>
+            Let’s begin this year with love, laughter,
+            and something special I made just for us 🌸
         </p>
     </div>
-
-    <button class="begin-btn">
-        Are you ready to begin? 💫
-    </button>
-
+    <button onclick="celebrate()">Let’s Celebrate 💖</button>
 </div>
 
 <!-- SCENE 2 -->
 <div class="scene" id="scene2">
-    <h1>The Way You Are ✨</h1>
-    <p>
-        You have this beautiful childish side that makes everything feel lighter and happier.
-        The way you get excited over small things, the way you smile without even realizing it —
-        it’s impossible not to adore that softness in you.
-        You’re playful, innocent, and effortlessly cute in ways that feel so real.
-    </p>
-    <p>
-        And it’s not just how you look — though you’re beautiful even at first glance —
-        it’s who you are inside that truly stands out.
-        Your heart is kind, your presence feels warm,
-        and there’s a quiet goodness in you that makes people feel safe around you.
-        You shine — inside and out — without ever trying.
-    </p>
+    <div class="chatbox" id="chatBox">
+        <p>Do you wanna see what I made for you? 💌</p>
+        <div class="chat-buttons">
+            <button onclick="yesClicked()">Yes ❤️</button>
+            <button>No 😌</button>
+        </div>
+    </div>
 </div>
 
-<!-- SCENE 3 -->
 <div class="scene" id="scene3">
-    <img src="assets/herpic1.jpg" id="photo" alt="Her Photo">
+    <img src="assets/herpic1.jpg" id="photo">
 
-    <p class="tease-text" id="teaseText">
-        Do you want to know who the world’s prettiest girl is? 😏💖
+    <p class="tease-text">
+        Do you want to know who’s the prettiest girl in the world? 💖
     </p>
 
     <p class="tap-hint" id="tapHint">Tap me ❤️</p>
 </div>
 
-<!-- SCENE 4 -->
+   <!-- SCENE 4 -->
 <div class="scene" id="scene4">
-    <h1 class="glow-name">Sanchitha ❤️</h1>
-    <p>
-        In a world full of moments,<br>
-        you became my favorite one.<br><br>
-        My heart feels at home<br>
-        whenever it thinks of you ✨
-    </p>
+
+    <!-- TOP HEADING (ALWAYS VISIBLE) -->
+    <h2 class="scene4-title">
+        An Invitation From My Heart 💌
+    </h2>
+
+    <div class="invite" id="inviteCard">
+        <div class="ribbon" id="ribbon">🎀 OPEN IT 🎀</div>
+
+        <h2>Sanchitha ❤️</h2>
+
+        <p>
+            You are not just my favorite person,
+            you are my peace, my smile,
+            and the soft thought my heart returns to.<br><br>
+
+            Loving you feels gentle… and real 💖
+        </p>
+
+        <button onclick="goFinal()">Still got many more to see 💫</button>
+    </div>
+
 </div>
 
-
-<!-- SCENE 5 -->
-<div class="scene" id="scene5">
-    <h1>Happy New Year 2026 🤍</h1>
-
-    <p class="mystery-text">
-        This is not the end… 💫<br>
-        Something made just for you<br>
-        is waiting on the next page 💖
-    </p>
-
-    <button class="next-btn" onclick="finalYes()">
-        For You 💕
-    </button>
 </div>
 
 <audio id="music" src="assets/piano.mp3" loop></audio>
 
 <script>
-/* Scene control */
 let current = 1;
-const total = 5;
 
 function nextScene() {
-    if (current >= total) return;
-
     document.getElementById(`scene${current}`).classList.remove('active');
     current++;
     document.getElementById(`scene${current}`).classList.add('active');
 }
 
-/* Scene 3 elements */
-const tapHint = document.getElementById("tapHint"); // "Tap me ❤️"
+/* Scene 2 chat */
+function yesClicked() {
+    const box = document.getElementById('chatBox');
+    box.classList.add('slide-out');
+
+    setTimeout(() => {
+        box.innerHTML = `
+            <p>Have a look at it, Madam Jii 😌💖</p>
+            <button onclick="nextScene()">Let’s Go 💕</button>
+        `;
+        box.classList.remove('slide-out');
+    }, 800);
+}
+
+/* Scene 3 reveal */
+const tapHint = document.getElementById("tapHint");
 const photo = document.getElementById("photo");
+let revealed = false;
 
-// Show "Tap me" immediately
-tapHint.style.opacity = "1";
+/* Show "Tap me ❤️" after a romantic pause */
+setTimeout(() => {
+    tapHint.style.opacity = "1";
+}, 1600); // delay before showing Tap Me
 
-// Flag to track if image has been revealed
-let imageRevealed = false;
+tapHint.addEventListener("click", e => {
+    e.stopPropagation();
+    if (revealed) return;
 
-// Tap me click for Scene 3
-tapHint.addEventListener("click", (e) => {
-    e.stopPropagation(); // prevent body click from triggering nextScene
+    revealed = true;
 
-    if (imageRevealed) return; // prevent multiple clicks
-    imageRevealed = true;
-
-    // Disable further clicks on Tap Me
+    // Prevent double clicking
     tapHint.style.pointerEvents = "none";
 
-    // Smooth blur-to-clear transition
-    photo.style.transition = "filter 1s ease, opacity 1s ease";
-    photo.style.filter = "blur(0px)";
-    photo.style.opacity = "1";
+    // Dramatic pause → reveal image
+    setTimeout(() => {
+        photo.classList.add("unblur");
+    }, 300);
 
-    // Start music softly
     fadeInMusic();
-
-    // Now wait until user clicks anywhere to move to next scene
-});
-
-// Body click progression for all scenes
-document.body.addEventListener('click', () => {
-    if (current === 3) {
-        if (imageRevealed) {
-            // Image revealed → proceed to next scene on click anywhere
-            nextScene();
-        }
-        // else do nothing until she clicks "Tap me"
-        return;
-    }
-    nextScene(); // All other scenes move on click
 });
 
 
-/* Music fade-in */
+document.body.addEventListener("click", () => {
+    if (current === 3 && revealed) nextScene();
+});
+
 function fadeInMusic() {
-    const music = document.getElementById('music');
+    const music = document.getElementById("music");
     music.volume = 0;
     music.play();
-
     let v = 0;
     const fade = setInterval(() => {
         v += 0.02;
@@ -467,35 +462,47 @@ function fadeInMusic() {
     }, 120);
 }
 
-/* 💖 Floating Hearts */
-function spawnHearts() {
-    setInterval(() => {
-        const h = document.createElement('div');
-        h.className = 'heart';
-        h.innerText = '💖';
-        h.style.left = Math.random() * 100 + 'vw';
-        h.style.top = '90vh';
-        document.body.appendChild(h);
+document.getElementById("ribbon").onclick = function () {
+    this.classList.add("open");
 
-        setTimeout(() => h.remove(), 3000);
-    }, 300);
+    setTimeout(() => {
+        document.getElementById("inviteCard")
+            .classList.add("show-content");
+    }, 1200);
+};
+function celebrate() {
+    const duration = 2000; // 2 seconds
+    const interval = setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "bg-heart";
+        heart.innerText = "💖";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.bottom = "-20px";
+        heart.style.fontSize = (Math.random() * 1.4 + 1.2) + "rem";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 3000);
+    }, 60); // MANY hearts
+
+    setTimeout(() => {
+        clearInterval(interval);
+        nextScene(); // move to scene 2
+    }, duration);
 }
 
-/* Final YES */
-function finalYes() {
-    spawnHearts();
-
-    // 💕 Emotional pause → next page
+/* Final */
+function goFinal() {
     setTimeout(() => {
         window.location.href = "hearts.html";
-    }, 4500);
+    }, 1200);
 }
-
 </script>
-
 
 </body>
 </html>
+
 
 
 
