@@ -564,6 +564,79 @@ body::after {
         transform: translateY(0);
     }
 }
+/* Ultra-romantic cinematic glow — name only */
+.name-glow {
+    font-family: 'Great Vibes', cursive;  /* romantic handwritten font */
+    font-size: 2.8rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+
+    color: #ffffff; /* glowing white */
+
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.95),
+        0 0 22px rgba(255, 210, 230, 0.9),
+        0 0 45px rgba(255, 140, 190, 0.85),
+        0 0 85px rgba(255, 90, 160, 0.8);
+
+    animation: heartBeatGlow 3.4s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+    0% {
+        transform: scale(1);
+    }
+
+    /* LUB */
+    12% {
+        transform: scale(1.12);
+        text-shadow:
+            0 0 18px rgba(255, 255, 255, 1),
+            0 0 35px rgba(255, 220, 235, 1),
+            0 0 70px rgba(255, 160, 200, 0.95),
+            0 0 120px rgba(255, 110, 180, 0.9);
+    }
+
+    20% {
+        transform: scale(1);
+    }
+
+    /* DUB (slightly smaller & faster) */
+    28% {
+        transform: scale(1.08);
+        text-shadow:
+            0 0 15px rgba(255, 255, 255, 0.95),
+            0 0 30px rgba(255, 210, 230, 0.9),
+            0 0 60px rgba(255, 150, 195, 0.85),
+            0 0 100px rgba(255, 90, 170, 0.8);
+    }
+
+    36% {
+        transform: scale(1);
+    }
+
+    /* Resting heart */
+    100% {
+        transform: scale(1);
+    }
+}
+.heart-pulse {
+    display: inline-block;
+    animation: heartPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes heartPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    12% {
+        transform: scale(1.15);
+    }
+    28% {
+        transform: scale(1.08);
+    }
+}
+@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
 
 </style>
 </head>
@@ -572,7 +645,10 @@ body::after {
     <!-- SCENE 0 : INTRO -->
 <div class="scene active" id="scene0">
     <div class="intro0-card">
-        <p class="intro0-small">Hii Sanchitha… 💖</p>
+        <p class="intro0-small">
+    <span class="name-glow">Hii Sanchitha</span>… 
+    <span class="heart-pulse">💖</span>
+</p>
 
         <h2 class="intro0-title">
             I made something<br>
@@ -795,6 +871,7 @@ function goFinal() {
 
 </body>
 </html>
+
 
 
 
