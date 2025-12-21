@@ -111,6 +111,47 @@ button:hover { transform: scale(1.1); }
     transform: translateX(-120%);
     opacity: 0;
 }
+/* Cute nudge text */
+/* Cinematic whisper text (no box) */
+.cute-whisper {
+    position: absolute;
+    top: 32%;
+    right: 18%;
+
+    font-size: 1.25rem;
+    font-weight: 500;
+
+    color: #2a0014; /* dark & readable */
+    text-shadow:
+        0 0 10px rgba(255,180,210,0.8),
+        0 0 20px rgba(255,105,180,0.6);
+
+    opacity: 0;
+    transform: translateX(12px);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+
+    pointer-events: none;
+}
+
+/* Show state */
+.cute-whisper.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Soft floating animation */
+.cute-whisper.show {
+    animation: whisperFloat 3.5s ease-in-out infinite;
+}
+
+@keyframes whisperFloat {
+    0% { transform: translateX(0) translateY(0); }
+    50% { transform: translateX(0) translateY(-6px); }
+    100% { transform: translateX(0) translateY(0); }
+}
 
 /* ---------------- SCENE 3 (UNCHANGED LOOK) ---------------- */
 #scene3 {
@@ -566,14 +607,23 @@ body::after {
 
 <!-- SCENE 2 -->
 <div class="scene" id="scene2">
+
     <div class="chatbox" id="chatBox">
         <p>Do you wanna see what I made for you? 💌</p>
+
         <div class="chat-buttons">
             <button onclick="yesClicked()">Yes ❤️</button>
-            <button>No 😌</button>
+            <button onclick="noClicked()">No 😌</button>
         </div>
     </div>
+
+    <span class="cute-whisper" id="cuteWhisper">
+        hehe… don’t be like that 😌💖 <br>
+        just click <b>Yes</b> naa ✨
+    </span>
+
 </div>
+
 
 <div class="scene" id="scene3">
     <img src="assets/herpic1.jpg" id="photo">
@@ -627,6 +677,13 @@ function nextScene() {
 
 /* Scene 2 chat */
 function yesClicked() {
+
+    // Hide the cute whisper when Yes is clicked
+    const whisper = document.getElementById("cuteWhisper");
+    if (whisper) {
+        whisper.classList.remove("show");
+    }
+
     const box = document.getElementById('chatBox');
     box.classList.add('slide-out');
 
@@ -637,6 +694,21 @@ function yesClicked() {
         `;
         box.classList.remove('slide-out');
     }, 800);
+}
+
+function noClicked() {
+    const whisper = document.getElementById("cuteWhisper");
+
+    whisper.classList.add("show");
+
+    // Tiny cinematic nudge
+    whisper.animate(
+        [
+            { opacity: 0, transform: "translateX(12px)" },
+            { opacity: 1, transform: "translateX(0)" }
+        ],
+        { duration: 600, easing: "ease-out" }
+    );
 }
 
 /* Scene 3 reveal */
@@ -723,6 +795,7 @@ function goFinal() {
 
 </body>
 </html>
+
 
 
 
