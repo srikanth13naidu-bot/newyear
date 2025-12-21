@@ -346,14 +346,212 @@ body::after {
         opacity: 0;
     }
 }
+/* ---------------- SCENE 0 INTRO ---------------- */
+
+.intro0-card {
+    background: rgba(255,255,255,0.22);
+    backdrop-filter: blur(18px);
+    padding: 45px 35px;
+    border-radius: 40px;
+    text-align: center;
+    max-width: 420px;
+
+    box-shadow:
+        0 0 40px rgba(255,105,180,0.6),
+        0 0 80px rgba(255,180,210,0.6);
+
+    animation: introFade 2s ease forwards;
+}
+
+@keyframes introFade {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.intro0-small {
+    font-size: 1.3rem;
+    color: #fff;
+    opacity: 0.9;
+}
+
+.intro0-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.8rem;
+    margin: 18px 0;
+
+    color: #fff;
+    text-shadow:
+        0 0 15px rgba(255,255,255,0.8),
+        0 0 35px rgba(255,105,180,0.9);
+}
+
+.intro0-text {
+    font-size: 1.4rem;
+    color: #fff;
+    line-height: 1.9rem;
+    margin-bottom: 25px;
+}
+
+.intro0-btn {
+    padding: 12px 28px;
+    font-size: 1.2rem;
+    border-radius: 30px;
+
+    background: linear-gradient(135deg, #ff85b3, #ff4f8b);
+    box-shadow: 0 6px 18px rgba(255,105,180,0.6);
+}
+
+.intro0-btn:hover {
+    transform: scale(1.05);
+}
+.intro0-small {
+    font-size: 2.4rem;
+    color: #fff;
+    letter-spacing: 1px;
+
+    text-shadow:
+        0 0 10px rgba(255,255,255,0.8),
+        0 0 25px rgba(255,105,180,0.9);
+}
+/* -------- CINEMATIC INVITATION UPGRADE -------- */
+
+.invite {
+    background:
+        linear-gradient(135deg, #fffdfc, #ffeef4),
+        radial-gradient(circle at top, rgba(255,200,220,0.4), transparent 60%);
+    
+    border-radius: 30px;
+    padding: 42px 34px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.25),
+        0 0 120px rgba(255,105,180,0.7);
+
+    border: 2px solid rgba(255,180,210,0.6);
+    position: relative;
+    overflow: hidden;
+
+    animation: inviteFloat 6s ease-in-out infinite;
+}
+
+/* Soft floating like a love letter */
+@keyframes inviteFloat {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
+
+/* Paper shine overlay */
+.invite::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent 30%,
+        rgba(255,255,255,0.4) 50%,
+        transparent 70%
+    );
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+/* Name styling */
+.invite h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.6rem;
+    margin-bottom: 8px;
+
+    color: #ff3f7a;
+    text-shadow:
+        0 0 15px rgba(255,105,180,0.7),
+        0 0 35px rgba(255,105,180,0.8);
+}
+
+/* Romantic divider */
+.invite-divider {
+    font-size: 1.4rem;
+    color: #ff85b3;
+    margin: 12px 0 18px;
+    opacity: 0.8;
+}
+
+/* Invitation text */
+.invite p {
+    font-size: 1.35rem;
+    line-height: 2.1rem;
+    color: #5a2b3b;
+
+    text-shadow: 0 0 8px rgba(255,180,210,0.3);
+}
+
+/* Ribbon enhancement */
+.ribbon {
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 2.2rem;
+    box-shadow:
+        inset 0 -6px 12px rgba(0,0,0,0.25),
+        0 10px 30px rgba(255,0,90,0.6);
+}
+
+/* Ribbon unwrap drama */
+.ribbon.open {
+    transform: translateY(-120%) rotate(-1deg);
+}
+
+/* Fade-in content more cinematic */
+.invite.show-content h2,
+.invite.show-content p,
+.invite.show-content .invite-divider,
+.invite.show-content button {
+    animation: contentReveal 1.8s ease forwards;
+}
+
+@keyframes contentReveal {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 </style>
 </head>
 
 <body>
+    <!-- SCENE 0 : INTRO -->
+<div class="scene active" id="scene0">
+    <div class="intro0-card">
+        <p class="intro0-small">Hii Sanchitha… 💖</p>
+
+        <h2 class="intro0-title">
+            I made something<br>
+            special for you ✨
+        </h2>
+
+        <p class="intro0-text">
+            A little journey,<br>
+            filled with love, surprises<br>
+            and everything my heart wants to say to you 💖
+        </p>
+
+        <button class="intro0-btn" onclick="nextScene()">
+            Let’s Begin 💫
+        </button>
+    </div>
+</div>
 
 <!-- SCENE 1 -->
-<div class="scene active" id="scene1">
+<div class="scene" id="scene1">
     <div class="intro-box">
         <h1 class="ny-title">Happy New Year 2026 ❤️</h1>
         <p class="intro-line">
@@ -381,7 +579,7 @@ body::after {
     <img src="assets/herpic1.jpg" id="photo">
 
     <p class="tease-text">
-        Do you want to know who’s the prettiest girl in the world? 💖
+        Do you want to know who’s the prettiest girl in the world? 😏💖
     </p>
 
     <p class="tap-hint" id="tapHint">Tap me ❤️</p>
@@ -399,6 +597,7 @@ body::after {
         <div class="ribbon" id="ribbon">🎀 OPEN IT 🎀</div>
 
         <h2>Sanchitha ❤️</h2>
+        <div class="invite-divider">❦ ❦ ❦</div>
 
         <p>
             You are not just my favorite person,
@@ -418,7 +617,7 @@ body::after {
 <audio id="music" src="assets/piano.mp3" loop></audio>
 
 <script>
-let current = 1;
+let current = 0;
 
 function nextScene() {
     document.getElementById(`scene${current}`).classList.remove('active');
@@ -524,6 +723,7 @@ function goFinal() {
 
 </body>
 </html>
+
 
 
 
