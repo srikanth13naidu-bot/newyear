@@ -401,7 +401,15 @@ body::after {
         0 0 40px rgba(255,105,180,0.6),
         0 0 80px rgba(255,180,210,0.6);
 
-    animation: introFade 2s ease forwards;
+    animation:
+    introFade 2s ease forwards,
+    cardBreath 5.5s ease-in-out infinite;
+
+}
+@keyframes cardBreath {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.015); }
+    100% { transform: scale(1); }
 }
 
 @keyframes introFade {
@@ -446,6 +454,20 @@ body::after {
 
     background: linear-gradient(135deg, #ff85b3, #ff4f8b);
     box-shadow: 0 6px 18px rgba(255,105,180,0.6);
+    opacity: 0;
+    animation: btnReveal 2s ease forwards;
+    animation-delay: 2.8s;
+
+}
+@keyframes btnReveal {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .intro0-btn:hover {
@@ -637,6 +659,27 @@ body::after {
     }
 }
 @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+.sparkle {
+    position: fixed;
+    top: -20px;
+    font-size: 0.9rem;
+    opacity: 0.85;
+    animation: sparkleFall 6s linear forwards;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes sparkleFall {
+    0% {
+        transform: translateY(0) scale(0.6);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    100% {
+        transform: translateY(110vh) scale(1.2);
+        opacity: 0;
+    }
+}
 
 </style>
 </head>
@@ -743,6 +786,27 @@ body::after {
 <audio id="music" src="assets/piano.mp3" loop></audio>
 
 <script>
+    function startSparkles() {
+    const emojis = ["✨", "💖", "🌸"];
+    const interval = setInterval(() => {
+        if (current !== 0) {
+            clearInterval(interval);
+            return;
+        }
+
+        const s = document.createElement("div");
+        s.className = "sparkle";
+        s.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        s.style.left = Math.random() * 100 + "vw";
+        s.style.fontSize = (Math.random() * 0.6 + 0.6) + "rem";
+
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 6000);
+    }, 380);
+}
+
+startSparkles();
+
 let current = 0;
 
 function nextScene() {
@@ -871,6 +935,7 @@ function goFinal() {
 
 </body>
 </html>
+
 
 
 
