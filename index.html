@@ -90,6 +90,61 @@ button:hover { transform: scale(1.1); }
     color: #fff;
     line-height: 2rem;
 }
+/* -------- SCENE 1 FONT UPGRADE -------- */
+
+#scene1 .ny-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.0rem, 3.0vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    white-space: nowrap;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 12px rgba(255,255,255,0.9),
+        0 0 28px rgba(255,105,180,0.8),
+        0 0 55px rgba(255,0,90,0.7);
+
+    animation: nyGlow 3.8s ease-in-out infinite;
+}
+
+
+/* Soft luxury glow */
+@keyframes nyGlow {
+    0% {
+        text-shadow:
+            0 0 12px rgba(255,255,255,0.8),
+            0 0 28px rgba(255,105,180,0.7),
+            0 0 55px rgba(255,0,90,0.6);
+    }
+    50% {
+        text-shadow:
+            0 0 18px rgba(255,255,255,1),
+            0 0 40px rgba(255,140,200,0.9),
+            0 0 80px rgba(255,70,140,0.85);
+    }
+    100% {
+        text-shadow:
+            0 0 12px rgba(255,255,255,0.8),
+            0 0 28px rgba(255,105,180,0.7),
+            0 0 55px rgba(255,0,90,0.6);
+    }
+}
+
+/* Scene 1 paragraph — romantic but calm */
+#scene1 .intro-line {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-style: italic;
+    line-height: 2.0rem;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,0.6),
+        0 0 20px rgba(255,160,200,0.6);
+}
 
 /* ---------------- SCENE 2 CHAT ---------------- */
 .chatbox {
@@ -680,6 +735,7 @@ body::after {
         opacity: 0;
     }
 }
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,600&display=swap');
 
 </style>
 </head>
@@ -935,6 +991,7 @@ function goFinal() {
 
 </body>
 </html>
+
 
 
 
